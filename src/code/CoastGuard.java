@@ -28,43 +28,13 @@ public class CoastGuard {
 
     public static String solve (String grid, String strategy, boolean visualize) {
 
-        GridGenerator gridGenerator = new GridGenerator(grid);
-        Object [][] constructedGrid = gridGenerator.getGrid();
-        GridObjectType [][] gridObjectTypes = new GridObjectType[constructedGrid.length][constructedGrid[0].length] ;
 
-        RescueBoat boat = gridGenerator.getBoat() ;
-        List<Ship> ships = new ArrayList<>() ;
-        for (int i=0; i<constructedGrid.length; i++){
-            for(int j=0; j<constructedGrid[0].length; j++) {
-               if (constructedGrid[i][j] instanceof Ship){
-                    ships.add((Ship) constructedGrid[i][j]) ;
-                    gridObjectTypes[i][j] = GridObjectType.SHIP ;
-                }
-                else if (constructedGrid[i][j] instanceof Station) {
-                    gridObjectTypes[i][j] = GridObjectType.STATION ;
-                }
-                else {
-                    gridObjectTypes[i][j] = GridObjectType.EMPTY ;
-                }
-            }
-        }
-
-        if (visualize) {
-            for (int i = 0; i < gridObjectTypes.length; i++) {
-                for (int j = 0; j < gridObjectTypes[0].length; j++) {
-                    if (gridObjectTypes[i][j] == GridObjectType.STATION)
-                        System.out.print(gridObjectTypes[i][j] + "  ");
-                    else if (gridObjectTypes[i][j] == GridObjectType.EMPTY)
-                        System.out.print(gridObjectTypes[i][j] + "    ");
-                    else if (gridObjectTypes[i][j] == GridObjectType.SHIP)
-                        System.out.print(gridObjectTypes[i][j] + "     ");
-                }
-                System.out.println();
-            }
-        }
+        Object [] objects=GridGenerator.buildGrid(grid);
+        RescueBoat boat=(RescueBoat) objects[0];
+        Grid gridObject=(Grid) objects[1];
 
         SearchAlgorithm algorithm = CoastGuard.getAlgorithm(strategy);
-        Node goalState = algorithm.search(ships, boat, gridObjectTypes, visualize);
+        Node goalState = algorithm.search(boat,gridObject,visualize);
         int deaths = goalState.getState().getDeaths() ;
         int retrieved = goalState.getState().getRetrieves();
         int steps = 0;

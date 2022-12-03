@@ -1,9 +1,9 @@
 package code.Algorithms;
 
-import code.state.BFSState;
+import code.grid.Grid;
+import code.state.ActionType;
 import code.state.Node;
 import code.state.State;
-import code.grid.GridObjectType;
 import code.grid.RescueBoat;
 import code.grid.Ship;
 
@@ -15,12 +15,12 @@ import java.util.Queue;
 public class BFS extends SearchAlgorithm {
 
     @Override
-    public Node search(List<Ship> ships, RescueBoat boat, GridObjectType [][] grid, boolean visualize) {
+    public Node search(RescueBoat boat, Grid grid, boolean visualize) {
 
         this.previousStates = new HashSet<>();
         Queue<Node> queue = new LinkedList<>() ;
-        State initialState = new BFSState(ships, boat);
-        Node rootNode = new Node(initialState, null, null, grid) ;
+        State initialState = new State(boat,grid);
+        Node rootNode = new Node(initialState, null, ActionType.start) ;
 
         previousStates.add(rootNode.toString());
         queue.add(rootNode) ;
@@ -42,12 +42,7 @@ public class BFS extends SearchAlgorithm {
                 return currentNode;
 
 
-            for (Ship ship: currentNode.getState().getRemainingShips()){
-
-                if (!ship.isWrecked())
-                    currentNode.getState().setDeaths(currentNode.getState().getDeaths()+1);
-                ship.update();
-            }
+            currentNode.getState().getGrid().update();
 
             Node up = currentNode.up() ;
             Node down = currentNode.down() ;

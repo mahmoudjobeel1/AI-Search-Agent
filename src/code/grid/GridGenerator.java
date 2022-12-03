@@ -5,17 +5,7 @@ import java.util.List;
 
 public class GridGenerator {
 
-
-    private RescueBoat boat;
-    private Object grid [][];
-
-    public GridGenerator () {
-
-    }
-    public GridGenerator (String grid) {
-        constructGridObjects(grid) ;
-    }
-    public String generateNewGrid (){
+    public static String generateNewGrid (){
         StringBuilder grid=new StringBuilder();
 
           /* this hashset in responsible for check if a position is occupied or not
@@ -44,12 +34,12 @@ public class GridGenerator {
     }
 
     // generate a random number through a given range
-    private int genRandomNum(int min, int max){
+    private static int genRandomNum(int min, int max){
         return min + (int)(Math.random() * ((max - min) + 1));
     }
 
     // generate a random initial position for the coast guard boat
-    private String genCoastGuardBoatPos(int m,int n,HashSet<String> positionsInGrid){
+    private static String genCoastGuardBoatPos(int m,int n,HashSet<String> positionsInGrid){
         int x=genRandomNum(0,m-1);
         int y=genRandomNum(0,n-1);
         positionsInGrid.add(x+" "+y);
@@ -57,7 +47,7 @@ public class GridGenerator {
     }
 
     // generate  random stations positions
-    private StringBuilder genStationsPositions(int m,int n,HashSet<String> positionsInGrid){
+    private static StringBuilder genStationsPositions(int m,int n,HashSet<String> positionsInGrid){
         int stationsNum=genRandomNum(1,m);
         StringBuilder positions=new StringBuilder();
         while(stationsNum-->0){
@@ -76,7 +66,7 @@ public class GridGenerator {
         return positions;
     }
 
-    private StringBuilder genShipsPositions(int m,int n,HashSet<String> positionsInGrid){
+    private static StringBuilder genShipsPositions(int m,int n,HashSet<String> positionsInGrid){
         int shipsNum=genRandomNum(1,m);
         StringBuilder positions=new StringBuilder();
         while(shipsNum-->0){
@@ -96,48 +86,36 @@ public class GridGenerator {
         return positions;
     }
 
-    private void constructGridObjects (String stringGrid) {
+    public static Object[] buildGrid (String stringGrid) {
+
+        // 0 is the boat, 1 is the grid
+        Object [] objects=new Object[2];
 
         String [] gridPartitions = stringGrid.split(";") ;
 
         String gridSize[] = gridPartitions[0].split(",");
-        Object [][] grid = new Object[Integer.parseInt(gridSize[0])][Integer.parseInt(gridSize[1])] ;
+
+        Grid grid=new Grid(Integer.parseInt(gridSize[1]),Integer.parseInt(gridSize[0]));
 
         int capacity = Integer.parseInt(gridPartitions[1]) ;
         String boatPosition [] = gridPartitions[2].split(",") ;
         RescueBoat boat = new RescueBoat(Integer.parseInt(boatPosition[0]), Integer.parseInt(boatPosition[1]), capacity) ;
-
-        this.boat = boat ;
+        objects[0]=boat;
 
         String stations [] = gridPartitions[3].split(",") ;
         for (int i=0; i<stations.length; i+=2) {
             Station station = new Station(Integer.parseInt(stations[i]), Integer.parseInt(stations[i+1])) ;
-            grid[station.getX()][station.getY()] = station;
+            grid.addStation(station);
         }
 
         String ships [] = gridPartitions[4].split(",") ;
         for (int i=0 ; i<ships.length; i+=3) {
             Ship ship = new Ship(Integer.parseInt(ships[i]), Integer.parseInt(ships[i+1]), Integer.parseInt(ships[i+2]));
-            grid[ship.getX()][ship.getY()] = ship ;
+            grid.addShip(ship);
         }
 
-        this.grid = grid;
+        return objects;
 
     }
 
-    public RescueBoat getBoat() {
-        return boat;
-    }
-
-    public void setBoat(RescueBoat boat) {
-        this.boat = boat;
-    }
-
-    public Object[][] getGrid() {
-        return grid;
-    }
-
-    public void setGrid(Object[][] grid) {
-        this.grid = grid;
-    }
 }

@@ -1,39 +1,27 @@
 package code.state;
 
+import code.grid.Grid;
 import code.grid.RescueBoat;
 import code.grid.Ship;
 
 import java.util.List;
 
-public abstract class State {
+public class State {
     // state representation <remainingShips, boatObject, actionLeadingToThisState>
-    private List<Ship> remainingShips ;
+    private Grid grid;
     private RescueBoat boat ;
     private int deaths ;
     private int retrieves;
 
+    public State() {}
 
-
-    public State() {
-
-    }
-    public State(List<Ship> remainingShips, RescueBoat boat) {
-        this.remainingShips = remainingShips;
+    public State(RescueBoat boat,Grid grid) {
+        this.grid=grid;
         this.boat = boat;
     }
 
-    public abstract State cloneState () ;
-
     public boolean checkGoalTest(){
-        return remainingShips.isEmpty() && boat.isEmpty();
-    }
-
-    public List<Ship> getRemainingShips() {
-        return remainingShips;
-    }
-
-    public void setRemainingShips(List<Ship> remainingShips) {
-        this.remainingShips = remainingShips;
+        return grid.isEmpty() && boat.isEmpty();
     }
 
     public RescueBoat getBoat() {
@@ -60,8 +48,17 @@ public abstract class State {
         this.retrieves = retrieves;
     }
 
-    public String toString () {
-        return remainingShips.toString() + "\n" + boat.toString() ;
+    public Grid getGrid() {
+        return grid;
     }
 
+    @Override
+    public String toString() {
+        return "State{" +
+                "grid=" + grid +
+                ", boat=" + boat +
+                ", deaths=" + deaths +
+                ", retrieves=" + retrieves +
+                '}';
+    }
 }

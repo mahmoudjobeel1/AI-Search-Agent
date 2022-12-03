@@ -7,5 +7,6 @@ public enum ActionType {
     right,
     pickup,
     retrieve,
-    drop
+    drop,
+    start
 }

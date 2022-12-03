@@ -1,25 +1,19 @@
 package code.state;
 
-import code.grid.GridObjectType;
 import code.grid.RescueBoat;
-import code.grid.Ship;
 
 public class Node {
     private State state ;
     private Node parent;
     private ActionType leadingAction;
 
-    private GridObjectType [][] grid ;
-
-
     public Node() {
     }
 
-    public Node(State state, Node parent, ActionType leadingAction, GridObjectType[][] grid) {
+    public Node(State state, Node parent, ActionType leadingAction) {
         this.state = state;
         this.parent = parent;
         this.leadingAction = leadingAction;
-        this.grid = grid;
     }
 
     public State getState() {
@@ -46,38 +40,25 @@ public class Node {
         this.leadingAction = leadingAction;
     }
 
-    public GridObjectType[][] getGrid() {
-        return grid;
-    }
 
-    public void setGrid(GridObjectType[][] grid) {
-        this.grid = grid;
-    }
 
     public Node cloneNode () {
         Node clone = new Node();
-        clone.setState(this.state.cloneState());
-        clone.setLeadingAction(this.leadingAction);
-        GridObjectType cloneGrid [][] = new GridObjectType [grid.length][grid[0].length];
-        for (int i  = 0; i<cloneGrid.length; i++){
-            for(int j = 0; j<cloneGrid[0].length; j++){
-                cloneGrid[i][j] = grid[i][j] ;
-            }
-        }
-        clone.setGrid(cloneGrid);
+        clone.state=state;
+        clone.leadingAction=leadingAction;
         return clone ;
     }
 
     public Node right () {
-        if (this.getState().getBoat().getY()==grid[0].length-1)
-            return null;
-
-        Node clone = this.cloneNode() ;
-        RescueBoat rescueBoat = clone.getState().getBoat();
-        rescueBoat.setY(rescueBoat.getY()+1);
-        clone.setLeadingAction(ActionType.right);
-        clone.setParent(this);
-        return clone ;
+//        if (this.getState().getBoat().getY()==grid[0].length-1)
+//            return null;
+//
+//        Node clone = this.cloneNode() ;
+//        RescueBoat rescueBoat = clone.getState().getBoat();
+//        rescueBoat.setY(rescueBoat.getY()+1);
+//        clone.setLeadingAction(ActionType.right);
+//        clone.setParent(this);
+        return null ;
     }
 
     public Node left() {
@@ -93,15 +74,15 @@ public class Node {
     }
 
     public Node up() {
-        if (this.getState().getBoat().getX()==grid.length-1)
-            return null;
-
-        Node clone = this.cloneNode() ;
-        RescueBoat rescueBoat = clone.getState().getBoat();
-        rescueBoat.setX(rescueBoat.getX()+1);
-        clone.setLeadingAction(ActionType.up);
-        clone.setParent(this);
-        return clone;
+//        if (this.getState().getBoat().getX()==grid.length-1)
+//            return null;
+//
+//        Node clone = this.cloneNode() ;
+//        RescueBoat rescueBoat = clone.getState().getBoat();
+//        rescueBoat.setX(rescueBoat.getX()+1);
+//        clone.setLeadingAction(ActionType.up);
+//        clone.setParent(this);
+        return null;
     }
 
     public Node down() {
