@@ -10,10 +10,9 @@ public class Node {
     public Node() {
     }
 
-    public Node(State state, Node parent, ActionType leadingAction) {
+    public Node(State state, Node parent) {
         this.state = state;
         this.parent = parent;
-        this.leadingAction = leadingAction;
     }
 
     public State getState() {

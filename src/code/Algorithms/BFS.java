@@ -20,7 +20,7 @@ public class BFS extends SearchAlgorithm {
         this.previousStates = new HashSet<>();
         Queue<Node> queue = new LinkedList<>() ;
         State initialState = new State(boat,grid);
-        Node rootNode = new Node(initialState, null, ActionType.start) ;
+        Node rootNode = new Node(initialState, null) ;
 
         previousStates.add(rootNode.toString());
         queue.add(rootNode) ;
