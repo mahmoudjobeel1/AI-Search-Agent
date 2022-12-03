@@ -3,10 +3,11 @@ package code.grid;
 
 public class Ship {
 
-    private GridPosition position;
     private int passengers ;
     private int blackBoxHealth ;
     private int deadPassengers;
+
+    private int x,y;
 
     private final int blackBoxFullHealth  = 20 ;
 
@@ -14,8 +15,8 @@ public class Ship {
 
     }
 
-    public Ship (GridPosition position, int passengers) {
-        this.position = position;
+    public Ship (int x,int y, int passengers) {
+        this.x=x;
         this.passengers = passengers;
     }
 
@@ -38,7 +39,8 @@ public class Ship {
 
     public Ship clone () {
         Ship clone = new Ship() ;
-        clone.position = this.position.clone() ;
+        clone.x=x;
+        clone.y=y;
         clone.passengers = this.passengers ;
         clone.deadPassengers = this.deadPassengers ;
         clone.blackBoxHealth = this.blackBoxHealth ;
@@ -53,13 +55,6 @@ public class Ship {
         return this.passengers == 0 && this.blackBoxHealth == blackBoxFullHealth ;
     }
 
-    public GridPosition getPosition() {
-        return position;
-    }
-
-    public void setPosition(GridPosition position) {
-        this.position = position;
-    }
 
     public int getPassengers() {
         return passengers;
@@ -81,7 +76,31 @@ public class Ship {
         return blackBoxHealth;
     }
 
-    public String toString(){
-        return "Ship Position: "+position+" |Num of passengers: "+passengers+" |BlackBox health: "+blackBoxHealth+" |Is Wrecked: "+isWrecked()+"\n";
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "Ship{" +
+                "passengers=" + passengers +
+                ", blackBoxHealth=" + blackBoxHealth +
+                ", deadPassengers=" + deadPassengers +
+                ", x=" + x +
+                ", y=" + y +
+                ", blackBoxFullHealth=" + blackBoxFullHealth +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 package code.state;
 
 import code.grid.GridObjectType;
-import code.grid.GridPosition;
+import code.grid.RescueBoat;
 import code.grid.Ship;
 
 public class Node {
@@ -69,99 +69,101 @@ public class Node {
     }
 
     public Node right () {
-        if (this.getState().getBoat().getPosition().getY()==grid[0].length-1)
+        if (this.getState().getBoat().getY()==grid[0].length-1)
             return null;
 
         Node clone = this.cloneNode() ;
-        GridPosition boatPosition = clone.getState().getBoat().getPosition();
-        boatPosition.setY(boatPosition.getY()+1);
+        RescueBoat rescueBoat = clone.getState().getBoat();
+        rescueBoat.setY(rescueBoat.getY()+1);
         clone.setLeadingAction(ActionType.right);
         clone.setParent(this);
         return clone ;
     }
 
     public Node left() {
-        if (this.getState().getBoat().getPosition().getY()==0)
+        if (this.getState().getBoat().getY()==0)
             return null;
 
         Node clone = this.cloneNode() ;
-        GridPosition boatPosition = clone.getState().getBoat().getPosition();
-        boatPosition.setY(boatPosition.getY()-1);
+        RescueBoat rescueBoat = clone.getState().getBoat();
+        rescueBoat.setY(rescueBoat.getY()-1);
         clone.setLeadingAction(ActionType.left);
         clone.setParent(this);
         return clone ;
     }
 
     public Node up() {
-        if (this.getState().getBoat().getPosition().getX()==grid.length-1)
+        if (this.getState().getBoat().getX()==grid.length-1)
             return null;
 
         Node clone = this.cloneNode() ;
-        GridPosition boatPosition = clone.getState().getBoat().getPosition();
-        boatPosition.setX(boatPosition.getX()+1);
+        RescueBoat rescueBoat = clone.getState().getBoat();
+        rescueBoat.setX(rescueBoat.getX()+1);
         clone.setLeadingAction(ActionType.up);
         clone.setParent(this);
         return clone;
     }
 
     public Node down() {
-        if (this.getState().getBoat().getPosition().getX()==0)
+        if (this.getState().getBoat().getX()==0)
             return null;
 
         Node clone = this.cloneNode() ;
-        GridPosition boatPosition = clone.getState().getBoat().getPosition() ;
-        boatPosition.setX(boatPosition.getX()-1);
+        RescueBoat rescueBoat = clone.getState().getBoat();
+        rescueBoat.setX(rescueBoat.getX()-1);
         clone.setLeadingAction(ActionType.down);
         clone.setParent(this);
         return clone;
     }
 
     public Node pickup() {
-        if (!grid[this.getState().getBoat().getPosition().getX()]
-                [this.getState().getBoat().getPosition().getY()].equals(GridObjectType.SHIP) ||
-            this.getState().getRemainingShips().size() == 0
-        )
-            return null;
-
-        GridPosition shipPosition = this.getState().getBoat().getPosition();
-        Node clone = this.cloneNode() ;
-        Ship currentShip = null ;
-        for (Ship ship: clone.getState().getRemainingShips()){
-            if (ship.getPosition().getX() == shipPosition.getX() &&
-                    ship.getPosition().getY() == shipPosition.getY()) {
-                currentShip = ship;
-                break;
-            }
-        }
-        if (!currentShip.isWrecked()){
-            int passengersToSave = Math.min(clone.getState().getBoat().getAvailableCapacity(), currentShip.getPassengers()) ;
-            currentShip.setPassengers(currentShip.getPassengers()-passengersToSave);
-            clone.getState().getBoat().setAvailableCapacity(clone.getState().getBoat().getAvailableCapacity()-passengersToSave);
-            clone.setLeadingAction(ActionType.pickup);
-        }
-        else if (!currentShip.isFullDamaged()) {
-            grid[clone.getState().getBoat().getPosition().getX()][clone.getState().getBoat().getPosition().getY()] = GridObjectType.EMPTY ;
-            clone.getState().getRemainingShips().remove(currentShip);
-            clone.getState().getBoat().setRescuedBlackBoxes(clone.getState().getBoat().getRescuedBlackBoxes()+1);
-            clone.setLeadingAction(ActionType.retrieve);
-            clone.getState().setRetrieves(clone.getState().getRetrieves()+1);
-        }
-        clone.setParent(this);
-        return clone ;
+//        if (!grid[this.getState().getBoat().getX()]
+//                [this.getState().getBoat().getY()].equals(GridObjectType.SHIP) ||
+//            this.getState().getRemainingShips().size() == 0
+//        )
+//            return null;
+//
+//        GridPosition shipPosition = this.getState().getBoat();
+//        Node clone = this.cloneNode() ;
+//        Ship currentShip = null ;
+//        for (Ship ship: clone.getState().getRemainingShips()){
+//            if (ship.getPosition().getX() == shipPosition.getX() &&
+//                    ship.getPosition().getY() == shipPosition.getY()) {
+//                currentShip = ship;
+//                break;
+//            }
+//        }
+//        if (!currentShip.isWrecked()){
+//            int passengersToSave = Math.min(clone.getState().getBoat().getAvailableCapacity(), currentShip.getPassengers()) ;
+//            currentShip.setPassengers(currentShip.getPassengers()-passengersToSave);
+//            clone.getState().getBoat().setAvailableCapacity(clone.getState().getBoat().getAvailableCapacity()-passengersToSave);
+//            clone.setLeadingAction(ActionType.pickup);
+//        }
+//        else if (!currentShip.isFullDamaged()) {
+//            grid[clone.getState().getBoat().getPosition().getX()][clone.getState().getBoat().getPosition().getY()] = GridObjectType.EMPTY ;
+//            clone.getState().getRemainingShips().remove(currentShip);
+//            clone.getState().getBoat().setRescuedBlackBoxes(clone.getState().getBoat().getRescuedBlackBoxes()+1);
+//            clone.setLeadingAction(ActionType.retrieve);
+//            clone.getState().setRetrieves(clone.getState().getRetrieves()+1);
+//        }
+//        clone.setParent(this);
+//        return clone ;
+        return null;
     }
 
     public Node drop() {
-        if (!grid[this.getState().getBoat().getPosition().getX()]
-                 [this.getState().getBoat().getPosition().getY()].equals(GridObjectType.STATION) ||
-            this.getState().getBoat().isEmpty()
-        )
-            return null ;
-
-        Node clone = this.cloneNode() ;
-        clone.getState().getBoat().emptyRescueBoat();
-        clone.setLeadingAction(ActionType.drop);
-        clone.setParent(this);
-        return clone;
+//        if (!grid[this.getState().getBoat().getPosition().getX()]
+//                 [this.getState().getBoat().getPosition().getY()].equals(GridObjectType.STATION) ||
+//            this.getState().getBoat().isEmpty()
+//        )
+//            return null ;
+//
+//        Node clone = this.cloneNode() ;
+//        clone.getState().getBoat().emptyRescueBoat();
+//        clone.setLeadingAction(ActionType.drop);
+//        clone.setParent(this);
+//        return clone;
+        return null;
     }
 
 

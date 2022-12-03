@@ -105,20 +105,20 @@ public class GridGenerator {
 
         int capacity = Integer.parseInt(gridPartitions[1]) ;
         String boatPosition [] = gridPartitions[2].split(",") ;
-        RescueBoat boat = new RescueBoat(new GridPosition(Integer.parseInt(boatPosition[0]), Integer.parseInt(boatPosition[1])), capacity) ;
+        RescueBoat boat = new RescueBoat(Integer.parseInt(boatPosition[0]), Integer.parseInt(boatPosition[1]), capacity) ;
 
         this.boat = boat ;
 
         String stations [] = gridPartitions[3].split(",") ;
         for (int i=0; i<stations.length; i+=2) {
-            Station station = new Station(new GridPosition(Integer.parseInt(stations[i]), Integer.parseInt(stations[i+1]))) ;
-            grid[station.getPosition().getX()][station.getPosition().getY()] = station;
+            Station station = new Station(Integer.parseInt(stations[i]), Integer.parseInt(stations[i+1])) ;
+            grid[station.getX()][station.getY()] = station;
         }
 
         String ships [] = gridPartitions[4].split(",") ;
         for (int i=0 ; i<ships.length; i+=3) {
-            Ship ship = new Ship(new GridPosition(Integer.parseInt(ships[i]), Integer.parseInt(ships[i+1])), Integer.parseInt(ships[i+2]));
-            grid[ship.getPosition().getX()][ship.getPosition().getY()] = ship ;
+            Ship ship = new Ship(Integer.parseInt(ships[i]), Integer.parseInt(ships[i+1]), Integer.parseInt(ships[i+2]));
+            grid[ship.getX()][ship.getY()] = ship ;
         }
 
         this.grid = grid;

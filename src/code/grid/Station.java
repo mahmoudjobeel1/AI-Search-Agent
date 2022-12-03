@@ -1,13 +1,14 @@
 package code.grid;
 
 public class Station {
-    private GridPosition position ;
     private int rescuedPassengers ;
 
     private int rescuedBlackBox;
 
-    public Station(GridPosition position) {
-        this.position = position;
+    private  int x,y;
+    public Station(int x,int y) {
+        this.x=x;
+        this.y=y;
     }
 
     public int getRescuedPassengers() {
@@ -18,9 +19,6 @@ public class Station {
         this.rescuedPassengers += rescuedPassengers;
     }
 
-    public GridPosition getPosition() {
-        return position;
-    }
 
     public int getRescuedBlackBox() {
         return rescuedBlackBox;
@@ -30,7 +28,29 @@ public class Station {
         this.rescuedBlackBox += rescuedBlackBox;
     }
 
-    public String toString(){
-        return "GridObjects.Station Position: "+position+" Rescued Passengers: "+rescuedPassengers+"\n";
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "rescuedPassengers=" + rescuedPassengers +
+                ", rescuedBlackBox=" + rescuedBlackBox +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

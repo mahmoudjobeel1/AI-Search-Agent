@@ -1,17 +1,19 @@
 package code.grid;
 
 public class RescueBoat {
-    private GridPosition position;
     private int capacity ;
     private int rescuedPassengers;
     private int rescuedBlackBoxes ;
     private int availableCapacity;
 
+    private int x, y;
+
     public RescueBoat () {
 
     }
-    public RescueBoat(GridPosition position, int capacity) {
-        this.position = position;
+    public RescueBoat(int x,int y, int capacity) {
+        this.x = x;
+        this.y=y;
         this.capacity = capacity;
         this.availableCapacity = capacity;
     }
@@ -31,20 +33,15 @@ public class RescueBoat {
 
     public RescueBoat clone () {
         RescueBoat clone = new RescueBoat() ;
-        clone.setPosition(this.position.clone());
+        clone.x=x;
+        clone.y=y;
         clone.setCapacity(this.capacity);
         clone.setRescuedPassengers(this.rescuedPassengers);
         clone.setAvailableCapacity(this.availableCapacity) ;
         return clone ;
     }
 
-    public GridPosition getPosition() {
-        return position;
-    }
 
-    public void setPosition(GridPosition position) {
-        this.position = position;
-    }
 
     public int getCapacity() {
         return capacity;
@@ -82,7 +79,31 @@ public class RescueBoat {
         this.rescuedBlackBoxes = rescuedBlackBoxes;
     }
 
-    public String toString(){
-        return "Rescue Boat Position: "+position+" |Full capacity: "+capacity +" |Available capacity: "+availableCapacity+" |Num of rescued passengers: "+rescuedPassengers+"\n";
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "RescueBoat{" +
+                "capacity=" + capacity +
+                ", rescuedPassengers=" + rescuedPassengers +
+                ", rescuedBlackBoxes=" + rescuedBlackBoxes +
+                ", availableCapacity=" + availableCapacity +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
     }
 }
