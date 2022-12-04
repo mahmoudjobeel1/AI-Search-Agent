@@ -42,7 +42,6 @@ public class RescueBoat {
     }
 
 
-
     public int getCapacity() {
         return capacity;
     }

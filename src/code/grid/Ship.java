@@ -5,7 +5,6 @@ public class Ship {
 
     private int passengers ;
     private int blackBoxHealth ;
-    private int deadPassengers;
 
     private int x,y;
 
@@ -33,7 +32,6 @@ public class Ship {
             this.blackBoxHealth += 1;
         }else{
             this.passengers -= 1;
-            this.deadPassengers += 1;
         }
     }
 
@@ -42,7 +40,6 @@ public class Ship {
         clone.x=x;
         clone.y=y;
         clone.passengers = this.passengers ;
-        clone.deadPassengers = this.deadPassengers ;
         clone.blackBoxHealth = this.blackBoxHealth ;
         return clone ;
     }
@@ -62,14 +59,6 @@ public class Ship {
 
     public void setPassengers(int passengers) {
         this.passengers = passengers;
-    }
-
-    public int getDeadPassengers() {
-        return deadPassengers;
-    }
-
-    public void setDeadPassengers(int deadPassengers) {
-        this.deadPassengers=deadPassengers;
     }
 
     public int getBlackBoxHealth() {
@@ -97,7 +86,6 @@ public class Ship {
         return "Ship{" +
                 "passengers=" + passengers +
                 ", blackBoxHealth=" + blackBoxHealth +
-                ", deadPassengers=" + deadPassengers +
                 ", x=" + x +
                 ", y=" + y +
                 ", blackBoxFullHealth=" + blackBoxFullHealth +

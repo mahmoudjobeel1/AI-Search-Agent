@@ -1,6 +1,8 @@
 package code.grid;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Grid {
     private int m,n;
@@ -18,6 +20,10 @@ public class Grid {
 
     public Ship getShip(int x,int y){return shipsHashMap.get(x+" "+y);}
 
+    public void removeShip(Ship ship){
+        shipsHashMap.remove(ship.getX()+" "+ship.getY());
+    }
+
     public Station getStation(int x,int y){return stationsHashMap.get(x+" "+y);}
 
     public void addShip(Ship ship){shipsHashMap.put(ship.getX()+" "+ship.getY(),ship);}
@@ -32,8 +38,18 @@ public class Grid {
 
     public boolean isEmpty(){return shipsHashMap.isEmpty();}
 
-    public void update(){
-        for(String key:shipsHashMap.keySet()) shipsHashMap.get(key).update();
+    // return how many people dead in this update
+    public int update(){
+        int deaths=0;
+        List<String> damagedShips=new ArrayList<>();
+        for(String key:shipsHashMap.keySet()) {
+            Ship ship=shipsHashMap.get(key);
+            if(!ship.isWrecked()) deaths++;
+            ship.update();
+            if(ship.isFullDamaged()) damagedShips.add(key);
+        }
+        for(String key:damagedShips) shipsHashMap.remove(key);
+        return deaths;
     }
 
     public Grid clone(){
@@ -43,6 +59,14 @@ public class Grid {
         clone.shipsHashMap=cloneShipsHashMap();
         clone.stationsHashMap=stationsHashMap;
         return clone;
+    }
+
+    public int getM() {
+        return m;
+    }
+
+    public int getN() {
+        return n;
     }
 
     @Override

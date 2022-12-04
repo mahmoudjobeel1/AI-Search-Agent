@@ -52,6 +52,20 @@ public class State {
         return grid;
     }
 
+    public void update(){
+        int deaths=grid.update();
+        setDeaths(getDeaths()+deaths);
+    }
+
+    public State clone(){
+        State clone=new State();
+        clone.grid=grid.clone();
+        clone.boat=boat.clone();
+        clone.deaths=deaths;
+        clone.retrieves=retrieves;
+        return clone;
+    }
+
     @Override
     public String toString() {
         return "State{" +
