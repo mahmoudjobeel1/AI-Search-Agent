@@ -8,7 +8,7 @@ public class Ship {
 
     private int x,y;
 
-    private final int blackBoxFullHealth  = 20 ;
+
 
     public Ship() {
 
@@ -16,6 +16,7 @@ public class Ship {
 
     public Ship (int x,int y, int passengers) {
         this.x=x;
+        this.y=y;
         this.passengers = passengers;
     }
 
@@ -29,7 +30,7 @@ public class Ship {
             return;
 
         if(isWrecked()){
-            this.blackBoxHealth += 1;
+            setBlackBoxHealth(getBlackBoxHealth()+1);
         }else{
             this.passengers -= 1;
         }
@@ -49,7 +50,7 @@ public class Ship {
     }
 
     public boolean isFullDamaged() {
-        return this.passengers == 0 && this.blackBoxHealth == blackBoxFullHealth ;
+        return this.passengers == 0 && this.blackBoxHealth ==20;
     }
 
 
@@ -59,6 +60,11 @@ public class Ship {
 
     public void setPassengers(int passengers) {
         this.passengers = passengers;
+    }
+
+    public void setBlackBoxHealth(int blackBoxHealth) {
+        if(blackBoxHealth>20) return;
+        this.blackBoxHealth = blackBoxHealth;
     }
 
     public int getBlackBoxHealth() {
@@ -88,7 +94,6 @@ public class Ship {
                 ", blackBoxHealth=" + blackBoxHealth +
                 ", x=" + x +
                 ", y=" + y +
-                ", blackBoxFullHealth=" + blackBoxFullHealth +
                 '}';
     }
 }

@@ -3,8 +3,7 @@ package code.state;
 import code.grid.Grid;
 import code.grid.RescueBoat;
 import code.grid.Ship;
-
-import java.util.List;
+import code.grid.Station;
 
 public class State {
     // state representation <remainingShips, boatObject, actionLeadingToThisState>
@@ -64,6 +63,34 @@ public class State {
         clone.deaths=deaths;
         clone.retrieves=retrieves;
         return clone;
+    }
+
+    public void gridVisualization(){
+        String rescueBoat=boat.getX()+" "+boat.getY();
+        for(int i=0;i<grid.getM();i++){
+            for(int j=0;j<grid.getN();j++){
+                Object o=grid.getShip(i,j)==null ? grid.getStation(i,j): grid.getShip(i,j);
+                String str="_";
+                if(o instanceof Ship){
+                    Ship ship=(Ship) o;
+                    if(!ship.isWrecked()){
+                        str="Sh("+ship.getPassengers()+")";
+                    }else{
+                        str="Wr("+ship.getBlackBoxHealth()+")";
+                    }
+                }else if(o instanceof Station) str="St";
+                if((i+" "+j).equals(rescueBoat)){
+                    if(str.equals("_")) System.out.format("%-15s", "B");
+                    else System.out.format("%-15s", str+"+B");
+                }else{
+                    System.out.format("%-15s", str);
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println("******************************************");
+        System.out.println();
     }
 
     @Override

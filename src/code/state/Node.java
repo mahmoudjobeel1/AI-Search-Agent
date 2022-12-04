@@ -12,6 +12,7 @@ public class Node {
     private Node parent;
     private ActionType leadingAction;
 
+
     public Node() {}
 
     public Node(State state, Node parent) {
@@ -105,7 +106,7 @@ public class Node {
             return null;
 
         clone.leadingAction=ActionType.retrieve;
-        rescueBoat.setRescuedBlackBoxes(rescueBoat.getRescuedBlackBoxes()+1);
+        clone.state.setRetrieves(clone.state.getRetrieves()+1);
         grid.removeShip(ship);
         clone.getState().update();
         return clone;
@@ -129,7 +130,7 @@ public class Node {
     public String getActionsPath(){
         LinkedList<String> actionsList=new LinkedList<>();
         Node current=this;
-        while(current!=null){
+        while(current.parent!=null){
             actionsList.addFirst(current.getLeadingAction().toString());
             current=current.parent;
         }
@@ -137,6 +138,15 @@ public class Node {
         while(!actionsList.isEmpty()) path.append(actionsList.pollFirst()).append(",");
         if(!path.isEmpty()) path.deleteCharAt(path.length()-1);
         return path.toString();
+    }
+
+    public String getGoalTestNodeString(){
+        StringBuilder ans=new StringBuilder();
+        ans.append(getActionsPath()).append(";");
+        ans.append(state.getDeaths()).append(";");
+        ans.append(state.getRetrieves()).append(";");
+
+        return ans.toString();
     }
 
     public State getState() {

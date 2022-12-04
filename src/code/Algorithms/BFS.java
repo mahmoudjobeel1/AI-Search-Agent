@@ -1,15 +1,14 @@
 package code.Algorithms;
 
 import code.grid.Grid;
-import code.state.ActionType;
 import code.state.Node;
 import code.state.State;
 import code.grid.RescueBoat;
-import code.grid.Ship;
+
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Queue;
 
 public class BFS extends SearchAlgorithm {
@@ -21,28 +20,17 @@ public class BFS extends SearchAlgorithm {
         Queue<Node> queue = new LinkedList<>() ;
         State initialState = new State(boat,grid);
         Node rootNode = new Node(initialState, null) ;
-
         previousStates.add(rootNode.toString());
+
         queue.add(rootNode) ;
 
         while (!queue.isEmpty()) {
             Node currentNode = queue.poll() ;
+            this.expandedNodes++;
 
-            if (visualize) {
+            if (currentNode.getState().checkGoalTest()) return currentNode;
 
-                System.out.println("*******************************************************************");
-                System.out.println("Leading action: "+ currentNode.getLeadingAction());
-
-                System.out.println(currentNode.toString());
-                System.out.println("*******************************************************************");
-                System.out.println();
-            }
-
-            if (currentNode.getState().checkGoalTest())
-                return currentNode;
-
-
-            currentNode.getState().getGrid().update();
+            if(visualize) currentNode.getState().gridVisualization();
 
             Node up = currentNode.up() ;
             Node down = currentNode.down() ;
@@ -50,31 +38,15 @@ public class BFS extends SearchAlgorithm {
             Node right = currentNode.right();
             Node pickup = currentNode.pickup() ;
             Node drop = currentNode.drop() ;
+            Node retrieve=currentNode.retrieve();
 
-            if(up != null && !previousStates.contains(up.toString())) {
-                queue.add(up);
-                this.previousStates.add(up.toString());
-            }
-            if(down != null && !previousStates.contains(down.toString())) {
-                queue.add(down);
-                this.previousStates.add(down.toString()) ;
-            }
-            if(left != null && !previousStates.contains(left.toString())) {
-                queue.add(left);
-                this.previousStates.add(left.toString());
-            }
-            if(right != null && !previousStates.contains(right.toString())) {
-                queue.add(right);
-                this.previousStates.add(right.toString()) ;
-            }
-            if(pickup != null && !previousStates.contains(pickup.toString())) {
-                queue.add(pickup);
-                this.previousStates.add(pickup.toString()) ;
-            }
-            if (drop != null && !previousStates.contains(drop.toString())) {
-                queue.add(drop);
-                this.previousStates.add(drop.toString()) ;
-            }
+           if(up!=null && previousStates.add(up.toString())) queue.add(up);
+           if(down!=null && previousStates.add(down.toString())) queue.add(down);
+           if(left!=null && previousStates.add(left.toString())) queue.add(left);
+           if(right!=null && previousStates.add(right.toString())) queue.add(right);
+           if(pickup!=null && previousStates.add(pickup.toString())) queue.add(pickup);
+           if(drop!=null && previousStates.add(drop.toString())) queue.add(drop);
+           if(retrieve!=null && previousStates.add(retrieve.toString())) queue.add(retrieve);
 
 
         }

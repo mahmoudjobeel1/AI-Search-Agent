@@ -1,7 +1,8 @@
 package code.grid;
 
+
 import java.util.HashSet;
-import java.util.List;
+
 
 public class GridGenerator {
 
@@ -94,7 +95,6 @@ public class GridGenerator {
         String [] gridPartitions = stringGrid.split(";") ;
 
         String gridSize[] = gridPartitions[0].split(",");
-
         Grid grid=new Grid(Integer.parseInt(gridSize[1]),Integer.parseInt(gridSize[0]));
 
         int capacity = Integer.parseInt(gridPartitions[1]) ;
@@ -108,12 +108,12 @@ public class GridGenerator {
             grid.addStation(station);
         }
 
-        String ships [] = gridPartitions[4].split(",") ;
+        String  [] ships= gridPartitions[4].split(",") ;
         for (int i=0 ; i<ships.length; i+=3) {
             Ship ship = new Ship(Integer.parseInt(ships[i]), Integer.parseInt(ships[i+1]), Integer.parseInt(ships[i+2]));
             grid.addShip(ship);
         }
-
+        objects[1]=grid;
         return objects;
 
     }
