@@ -16,7 +16,7 @@ public class BFS extends SearchAlgorithm {
     @Override
     public Node search(RescueBoat boat, Grid grid, boolean visualize) {
 
-        this.previousStates = new HashSet<>();
+
         Queue<Node> queue = new LinkedList<>() ;
         State initialState = new State(boat,grid);
         Node rootNode = new Node(initialState, null) ;
