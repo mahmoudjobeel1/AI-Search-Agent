@@ -20,7 +20,8 @@ public class CoastGuard {
             case "BF" : return new BFS();
             case "DF" : return new DF() ;
             case "ID" : return new ID() ;
-            case "GR" : return new GR() ;
+            case "GR1" : return new GR1() ;
+            case "GR2" : return new GR2() ;
             default: return new AS() ;
         }
     }
