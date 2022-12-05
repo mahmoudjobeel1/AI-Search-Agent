@@ -22,7 +22,8 @@ public class CoastGuard {
             case "ID" : return new ID() ;
             case "GR1" : return new GR1() ;
             case "GR2" : return new GR2() ;
-            default: return new AS() ;
+            case "AS1" : return new AS1() ;
+            default: return new AS2() ;
         }
     }
 
