@@ -7,7 +7,7 @@ import code.grid.Ship;
 
 import java.util.List;
 
-public class GR extends SearchAlgorithm{
+public class AS2 extends SearchAlgorithm{
 
     @Override
     public Node search(RescueBoat boat, Grid grid, boolean visualize) {

@@ -1,6 +1,9 @@
 package code.grid;
 
 
+import code.state.ActionType;
+import code.state.Node;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +54,52 @@ public class Grid {
         }
         for(String key:damagedShips) shipsHashMap.remove(key);
         return deaths;
+    }
+
+    public int distance(Node n, int i) {
+        Integer d = null;
+        if (n.getLeadingAction() == ActionType.drop || n.getLeadingAction() == ActionType.pickup || n.getLeadingAction() == ActionType.retrieve)
+            return 0;
+        if (!n.getState().getBoat().isFull()) {
+            if (i == 1)
+                d = calculateMinDistance(n.getState().getBoat(), shipsHashMap);
+            else
+                d = calculateMaxPass(n.getState().getBoat(), shipsHashMap);
+            if (d != null)
+                return d;
+        }
+        return calculateMinDistance(n.getState().getBoat(), stationsHashMap);
+    }
+
+    private int calculateDistance(RescueBoat b, String s){
+        String[] loc = ((String)s).split(" ");
+        return Math.abs(Integer.parseInt(loc[0]) - b.getX()) + Math.abs(Integer.parseInt(loc[1]) - b.getY());
+    }
+
+    private Integer calculateMinDistance(RescueBoat b, HashMap h) {
+        int d = Integer.MAX_VALUE;
+        for(Object s: h.keySet()){
+            d = Math.min(d, calculateDistance(b,(String)s));
+        }
+        if(d == Integer.MAX_VALUE)
+            return null;
+        return d;
+    }
+
+    private Integer calculateMaxPass(RescueBoat b, HashMap<String,Ship> h) {
+        int n = Integer.MIN_VALUE;
+        Ship s = null;
+        for(String st: h.keySet()){
+            int d = calculateDistance(b,st);
+            if(n > Math.max(0, h.get(st).getPassengers() - d)*-1 || n > Math.max(0, h.get(st).getBlackBoxHealth() - d)){
+                s = h.get(st);
+                n = Math.min(s.getPassengers()*-1, s.getBlackBoxHealth());
+            }
+        }
+        if(s == null)
+            return null;
+        String st = s.getX()+ " " + s.getY();
+        return calculateDistance(b,st);
     }
 
     public Grid clone(){
