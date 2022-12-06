@@ -24,7 +24,7 @@ public class Node {
         RescueBoat rescueBoat=state.getBoat();
         Grid grid=state.getGrid();
 
-        if (rescueBoat.getY()==grid.getN())
+        if (rescueBoat.getY()==grid.getN()-1)
             return null;
 
         Node clone= new Node(state.clone(),this);
@@ -67,7 +67,7 @@ public class Node {
         RescueBoat rescueBoat=state.getBoat();
         Grid grid=state.getGrid();
 
-        if (rescueBoat.getX()==grid.getM())
+        if (rescueBoat.getX()==grid.getM()-1)
             return null;
 
         Node clone= new Node(state.clone(),this);

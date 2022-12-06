@@ -57,18 +57,10 @@ public class Grid {
     }
 
     public int distance(Node n, int i) {
-        Integer d = null;
-        if (n.getLeadingAction() == ActionType.drop || n.getLeadingAction() == ActionType.pickup || n.getLeadingAction() == ActionType.retrieve)
-            return 0;
-        if (!n.getState().getBoat().isFull()) {
-            if (i == 1)
-                d = calculateMinDistance(n.getState().getBoat(), shipsHashMap);
-            else
-                d = calculateMaxPass(n.getState().getBoat(), shipsHashMap);
-            if (d != null)
-                return d;
+        if(n.getState().getBoat().isFull() || shipsHashMap.isEmpty()){
+            return calculateMinDistanceStation(n.getState().getBoat());
         }
-        return calculateMinDistance(n.getState().getBoat(), stationsHashMap);
+        return i==1? calculateMinDistanceShip(n.getState().getBoat()):calculateMaxPass(n.getState().getBoat(), shipsHashMap);
     }
 
     private int calculateDistance(RescueBoat b, String s){
@@ -76,14 +68,24 @@ public class Grid {
         return Math.abs(Integer.parseInt(loc[0]) - b.getX()) + Math.abs(Integer.parseInt(loc[1]) - b.getY());
     }
 
-    private Integer calculateMinDistance(RescueBoat b, HashMap h) {
+    private int calculateMinDistanceStation(RescueBoat b) {
         int d = Integer.MAX_VALUE;
-        for(Object s: h.keySet()){
-            d = Math.min(d, calculateDistance(b,(String)s));
+        for(String key: stationsHashMap.keySet()) {
+            d = Math.min(d, calculateDistance(b, key));
         }
-        if(d == Integer.MAX_VALUE)
-            return null;
         return d;
+    }
+    private int calculateMinDistanceShip(RescueBoat b) {
+        int dShip = Integer.MAX_VALUE;
+        int dWreck= Integer.MAX_VALUE;
+        for(String key: shipsHashMap.keySet()) {
+            Ship ship=shipsHashMap.get(key);
+            int distance=calculateDistance(b, key);
+            if(!ship.isWrecked())
+                dShip = Math.min(dShip, distance);
+            else dWreck = Math.min(dWreck, distance);
+        }
+        return dShip==Integer.MAX_VALUE? dWreck:dShip;
     }
 
     private Integer calculateMaxPass(RescueBoat b, HashMap<String,Ship> h) {
