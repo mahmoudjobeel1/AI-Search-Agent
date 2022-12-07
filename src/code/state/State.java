@@ -10,6 +10,9 @@ public class State {
     private Grid grid;
     private RescueBoat boat ;
     private int deaths ;
+    private int damagedBoxes ;
+
+    private int currentDamages ;
     private int retrieves;
 
     public State() {}
@@ -51,9 +54,27 @@ public class State {
         return grid;
     }
 
+    public int getDamagedBoxes() {
+        return damagedBoxes;
+    }
+
+    public void setDamagedBoxes(int damagedBoxes) {
+        this.damagedBoxes = damagedBoxes;
+    }
+
+    public int getCurrentDamages() {
+        return currentDamages;
+    }
+
+    public void setCurrentDamage(int currentDamages) {
+        this.currentDamages = currentDamages;
+    }
+
     public void update(){
-        int deaths=grid.update();
-        setDeaths(getDeaths()+deaths);
+        int updates [] = grid.update();
+        setDeaths(getDeaths() + updates[0]);
+        setDamagedBoxes(getDamagedBoxes() + updates[1]);
+        setCurrentDamage(updates[2]);
     }
 
     public State clone(){

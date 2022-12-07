@@ -43,17 +43,23 @@ public class Grid {
     public boolean isEmpty(){return shipsHashMap.isEmpty();}
 
     // return how many people dead in this update
-    public int update(){
+    public int [] update(){
         int deaths=0;
+        int damage = 0;
         List<String> damagedShips=new ArrayList<>();
         for(String key:shipsHashMap.keySet()) {
             Ship ship=shipsHashMap.get(key);
-            if(!ship.isWrecked()) deaths++;
+            if(!ship.isWrecked()) {
+                deaths++ ;
+            }
             ship.update();
+            if (ship.isWrecked() && !ship.isFullDamaged()) {
+                damage += ship.getBlackBoxHealth() ;
+            }
             if(ship.isFullDamaged()) damagedShips.add(key);
         }
         for(String key:damagedShips) shipsHashMap.remove(key);
-        return deaths;
+        return new int [] {deaths, damagedShips.size(), damage};
     }
 
 

@@ -163,6 +163,17 @@ public class Node {
         return possibleSavedPassengers;
     }
 
+    public int pathCost () {
+        return state.getDeaths() + state.getDamagedBoxes() ;
+    }
+
+    public int aStar1() {
+        return pathCost() + heuristicGR1() ;
+    }
+
+    public int aStar2() {
+        return pathCost() + heuristicGR2();
+    }
 
     public State getState() {
         return state;

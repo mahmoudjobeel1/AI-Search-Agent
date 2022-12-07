@@ -220,6 +220,7 @@ public class CoastGuardPublic {
 	@Test(timeout = 10000)
 	public void teste2() throws Exception {
 		String solution = CoastGuard.solve(grid2, "GR1", false);
+		System.out.println(solution);
 		assertTrue("The output actions do not lead to a goal state.", applyPlan(grid2, solution));
 	}
 	@Test(timeout = 30000)
