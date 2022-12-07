@@ -68,14 +68,14 @@ public class Grid {
         return Math.abs(Integer.parseInt(loc[0]) - b.getX()) + Math.abs(Integer.parseInt(loc[1]) - b.getY());
     }
 
-    private int calculateMinDistanceStation(RescueBoat b) {
+    public int calculateMinDistanceStation(RescueBoat b) {
         int d = Integer.MAX_VALUE;
         for(String key: stationsHashMap.keySet()) {
             d = Math.min(d, calculateDistance(b, key));
         }
         return d;
     }
-    private int calculateMinDistanceShip(RescueBoat b) {
+    public int calculateMinDistanceShip(RescueBoat b) {
         int dShip = Integer.MAX_VALUE;
         int dWreck= Integer.MAX_VALUE;
         for(String key: shipsHashMap.keySet()) {

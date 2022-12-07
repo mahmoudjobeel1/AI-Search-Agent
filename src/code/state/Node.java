@@ -102,9 +102,8 @@ public class Node {
         Grid grid=clone.state.getGrid();
         Ship ship=grid.getShip(rescueBoat.getX(),rescueBoat.getY());
 
-        if(ship==null || !ship.isWrecked())
+        if(ship==null || !ship.isWrecked() || ship.getBlackBoxHealth()>=19)
             return null;
-
         clone.leadingAction=ActionType.retrieve;
         clone.state.setRetrieves(clone.state.getRetrieves()+1);
         grid.removeShip(ship);
@@ -148,12 +147,21 @@ public class Node {
 
         return ans.toString();
     }
+    public int heuristicGR1() {
+        Grid grid = getState().getGrid();
+        RescueBoat rescueBoat = getState().getBoat();
+        int distance=grid.calculateMinDistanceShip(rescueBoat);
+        if(rescueBoat.isFull() || distance==Integer.MAX_VALUE) return grid.calculateMinDistanceStation(rescueBoat);
+        return distance;
+    }
+
 
     public State getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(State state)
+    {
         this.state = state;
     }
 
