@@ -155,6 +155,14 @@ public class Node {
         return distance;
     }
 
+    public int heuristicGR2() {
+        Grid grid = getState().getGrid();
+        RescueBoat rescueBoat = getState().getBoat();
+        int possibleSavedPassengers=grid.getHighestNumOfPossibleSavedPassengers(rescueBoat);
+        if(rescueBoat.isFull() || possibleSavedPassengers==Integer.MIN_VALUE) return -grid.calculateMinDistanceStation(rescueBoat);
+        return possibleSavedPassengers;
+    }
+
 
     public State getState() {
         return state;

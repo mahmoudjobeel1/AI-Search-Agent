@@ -56,12 +56,6 @@ public class Grid {
         return deaths;
     }
 
-    public int distance(Node n, int i) {
-        if(n.getState().getBoat().isFull() || shipsHashMap.isEmpty()){
-            return calculateMinDistanceStation(n.getState().getBoat());
-        }
-        return i==1? calculateMinDistanceShip(n.getState().getBoat()):calculateMaxPass(n.getState().getBoat(), shipsHashMap);
-    }
 
     private int calculateDistance(RescueBoat b, String s){
         String[] loc = ((String)s).split(" ");
@@ -75,33 +69,23 @@ public class Grid {
         }
         return d;
     }
-    public int calculateMinDistanceShip(RescueBoat b) {
+    public int calculateMinDistanceShip(RescueBoat rescueBoat) {
         int dShip = Integer.MAX_VALUE;
-        int dWreck= Integer.MAX_VALUE;
         for(String key: shipsHashMap.keySet()) {
-            Ship ship=shipsHashMap.get(key);
-            int distance=calculateDistance(b, key);
-            if(!ship.isWrecked())
-                dShip = Math.min(dShip, distance);
-            else dWreck = Math.min(dWreck, distance);
+            int distance=calculateDistance(rescueBoat, key);
+            dShip = Math.min(dShip, distance);
         }
-        return dShip==Integer.MAX_VALUE? dWreck:dShip;
+        return dShip;
     }
 
-    private Integer calculateMaxPass(RescueBoat b, HashMap<String,Ship> h) {
-        int n = Integer.MIN_VALUE;
-        Ship s = null;
-        for(String st: h.keySet()){
-            int d = calculateDistance(b,st);
-            if(n > Math.max(0, h.get(st).getPassengers() - d)*-1 || n > Math.max(0, h.get(st).getBlackBoxHealth() - d)){
-                s = h.get(st);
-                n = Math.min(s.getPassengers()*-1, s.getBlackBoxHealth());
-            }
+    public int getHighestNumOfPossibleSavedPassengers(RescueBoat rescueBoat){
+        int max=Integer.MIN_VALUE;
+        for(String key:shipsHashMap.keySet()){
+            int distance=calculateDistance(rescueBoat, key);
+            Ship ship=shipsHashMap.get(key);
+            max=Math.max(max,ship.getPassengers()-distance);
         }
-        if(s == null)
-            return null;
-        String st = s.getX()+ " " + s.getY();
-        return calculateDistance(b,st);
+        return max;
     }
 
     public Grid clone(){
