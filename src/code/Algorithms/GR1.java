@@ -16,6 +16,8 @@ public class GR1 extends SearchAlgorithm{
         Node rootNode = new Node(initialState, null);
         previousStates.add(rootNode.toString());
         Node currentNode=rootNode;
+        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Node::heuristicGR1));
+
         while (currentNode!=null) {
             expandedNodes++;
 
@@ -31,19 +33,17 @@ public class GR1 extends SearchAlgorithm{
             Node drop = currentNode.drop();
             Node retrieve = currentNode.retrieve();
 
-
-            PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Node::heuristicGR1));
-
-            if (retrieve != null && previousStates.add(retrieve.toString())){ currentNode=retrieve; continue;}
-            if (drop != null && previousStates.add(drop.toString())) {currentNode=drop; continue;}
-            if (pickup != null && previousStates.add(pickup.toString())) {currentNode=pickup; continue;}
+            boolean f=true;
+            if (retrieve != null && previousStates.add(retrieve.toString())){ currentNode=retrieve; f=false;}
+            if (drop != null && previousStates.add(drop.toString())) {currentNode=drop; f=false;}
+            if (pickup != null && previousStates.add(pickup.toString())) {currentNode=pickup; f=false;}
 
             if (right != null && previousStates.add(right.toString())) priorityQueue.add(right);
             if (left != null && previousStates.add(left.toString())) priorityQueue.add(left);
             if (down != null && previousStates.add(down.toString())) priorityQueue.add(down);
             if (up != null && previousStates.add(up.toString())) priorityQueue.add(up);
 
-            if(!priorityQueue.isEmpty())
+            if(f)
                 currentNode= priorityQueue.poll();
 
         }
