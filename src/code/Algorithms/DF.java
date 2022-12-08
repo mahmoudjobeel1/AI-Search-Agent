@@ -36,17 +36,16 @@ public class DF extends SearchAlgorithm{
             Node drop = currentNode.drop() ;
             Node retrieve=currentNode.retrieve();
 
-            Node temp=null;
 
-            if(retrieve!=null && previousStates.add(retrieve.toString())) temp=retrieve;
-            if(drop!=null && previousStates.add(drop.toString())) temp=drop;
-            if(pickup!=null && previousStates.add(pickup.toString())) temp=pickup;
+
             if(right!=null && previousStates.add(right.toString())) stack.add(right);
             if(left!=null && previousStates.add(left.toString())) stack.add(left);
             if(down!=null && previousStates.add(down.toString())) stack.add(down);
             if(up!=null && previousStates.add(up.toString())) stack.add(up);
 
-            if(temp!=null) stack.push(temp);
+            if(retrieve!=null && previousStates.add(retrieve.toString())) stack.push(retrieve);
+            if(drop!=null && previousStates.add(drop.toString())) stack.push(drop);
+            if(pickup!=null && previousStates.add(pickup.toString())) stack.push(pickup);
         }
         return null;
     }
