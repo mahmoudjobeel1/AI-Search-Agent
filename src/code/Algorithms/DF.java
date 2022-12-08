@@ -16,11 +16,11 @@ public class DF extends SearchAlgorithm{
         State initialState = new State(boat,grid);
         Node rootNode = new Node(initialState, null) ;
         previousStates.add(rootNode.toString());
-
+        Node currentNode=rootNode;
         stack.add(rootNode) ;
 
-        while (!stack.isEmpty()) {
-            Node currentNode = stack.pop();
+        while (currentNode!=null) {
+
 
             expandedNodes++;
 
@@ -36,13 +36,16 @@ public class DF extends SearchAlgorithm{
             Node drop = currentNode.drop() ;
             Node retrieve=currentNode.retrieve();
 
-            if(retrieve!=null && previousStates.add(retrieve.toString())) stack.add(retrieve);
-            if(drop!=null && previousStates.add(drop.toString())) stack.add(drop);
-            if(pickup!=null && previousStates.add(pickup.toString())) stack.add(pickup);
+            boolean f=true;
+            if(retrieve!=null && previousStates.add(retrieve.toString())) {currentNode=retrieve; f=false;}
+            if(drop!=null && previousStates.add(drop.toString())) {currentNode=drop; f=false;}
+            if(pickup!=null && previousStates.add(pickup.toString())) {currentNode=pickup; f=false;}
             if(right!=null && previousStates.add(right.toString())) stack.add(right);
             if(left!=null && previousStates.add(left.toString())) stack.add(left);
             if(down!=null && previousStates.add(down.toString())) stack.add(down);
             if(up!=null && previousStates.add(up.toString())) stack.add(up);
+
+            if(f) currentNode=stack.pop();
         }
         return null;
     }
