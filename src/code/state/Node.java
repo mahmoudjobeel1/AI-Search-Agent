@@ -163,16 +163,51 @@ public class Node {
         return possibleSavedPassengers;
     }
 
+    public int aStarHeuristic1() {
+        Grid grid = getState().getGrid();
+        RescueBoat rescueBoat = getState().getBoat();
+        int wreckedDistance = grid.calculateMinDistanceWreckedShip(rescueBoat);
+        int nonWreckedDistance = grid.calculateMinDistanceNonWreckedShip(rescueBoat) ;
+        int station = grid.calculateMinDistanceStation(rescueBoat);
+
+        if(rescueBoat.isFull())
+            return  station;
+        if(nonWreckedDistance != Integer.MAX_VALUE) {
+            return nonWreckedDistance;
+        }
+        if(wreckedDistance != Integer.MAX_VALUE)
+            return wreckedDistance ;
+        return -(grid.getN()+grid.getM()) +station ;
+    }
+
+
+    public int aStarHeuristic2() {
+
+        Grid grid = getState().getGrid();
+        RescueBoat rescueBoat = getState().getBoat();
+        int possibleSavedPassengers = grid.getHighestNumOfPossibleSavedPassengers(rescueBoat);
+        int wreckedDistance = grid.calculateMinDistanceWreckedShip(rescueBoat);
+        int station = grid.calculateMinDistanceStation(rescueBoat);
+
+        if(rescueBoat.isFull())
+            return  station;
+        if(possibleSavedPassengers == Integer.MIN_VALUE) {
+            if (wreckedDistance != Integer.MAX_VALUE)
+                return wreckedDistance;
+        }
+        return  possibleSavedPassengers;
+    }
     public int pathCost () {
-        return state.getDeaths() + state.getDamagedBoxes() ;
+        int maxDistance = (state.getGrid().getN()+state.getGrid().getM());
+        return maxDistance*(2*state.getDeaths() + state.getDamagedBoxes()) ;
     }
 
     public int aStar1() {
-        return pathCost() + heuristicGR1() ;
+        return pathCost() + aStarHeuristic1() ;
     }
 
     public int aStar2() {
-        return pathCost() + heuristicGR2();
+        return pathCost() + aStarHeuristic2();
     }
 
     public State getState() {

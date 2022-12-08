@@ -84,6 +84,26 @@ public class Grid {
         return dShip;
     }
 
+    public int calculateMinDistanceWreckedShip(RescueBoat rescueBoat) {
+        int dShip = Integer.MAX_VALUE;
+        for(String key: shipsHashMap.keySet()) {
+            int distance=calculateDistance(rescueBoat, key);
+            if(shipsHashMap.get(key).isWrecked())
+                dShip = Math.min(dShip, distance);
+        }
+        return dShip;
+    }
+
+    public int calculateMinDistanceNonWreckedShip(RescueBoat rescueBoat) {
+        int dShip = Integer.MAX_VALUE;
+        for(String key: shipsHashMap.keySet()) {
+            int distance=calculateDistance(rescueBoat, key);
+            if(!shipsHashMap.get(key).isWrecked())
+                dShip = Math.min(dShip, distance);
+        }
+        return dShip;
+    }
+
     public int getHighestNumOfPossibleSavedPassengers(RescueBoat rescueBoat){
         int max=Integer.MIN_VALUE;
         for(String key:shipsHashMap.keySet()){
@@ -110,6 +130,15 @@ public class Grid {
     public int getN() {
         return n;
     }
+
+    public HashMap<String, Ship> getShipsHashMap() {
+        return shipsHashMap;
+    }
+
+    public HashMap<String, Station> getStationsHashMap() {
+        return stationsHashMap;
+    }
+
 
     @Override
     public String toString() {

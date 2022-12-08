@@ -27,8 +27,6 @@ public class AS1 extends SearchAlgorithm {
             if (currentNode.getState().checkGoalTest()) return currentNode;
 
             if (visualize){
-                System.out.println(currentNode.aStar1());
-                System.out.println(priorityQueue);
                 currentNode.getState().gridVisualization();
             }
 
