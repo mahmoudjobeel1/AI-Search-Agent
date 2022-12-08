@@ -220,7 +220,6 @@ public class CoastGuardPublic {
 	@Test(timeout = 10000)
 	public void teste2() throws Exception {
 		String solution = CoastGuard.solve(grid2, "GR1", false);
-		System.out.println(solution);
 		assertTrue("The output actions do not lead to a goal state.", applyPlan(grid2, solution));
 	}
 	@Test(timeout = 30000)
@@ -591,7 +590,6 @@ static class Checker{
 			m4.put(sh[i]+","+sh[i+1],Byte.parseByte(sh[i+2]));
 		}
 		Checker s = new	Checker(m, n, x, x00, x01, xyz, m4);
-		int tt=0;
 		for (int i = 0; i < actions.length; i++) {
 		
 			switch (actions[i]) {
@@ -614,14 +612,12 @@ static class Checker{
 				linkin = s.f3();
 				break;
 			case "retrieve":
-				tt++;
 				linkin = s.f4();
 				break;
 			default: linkin = false; break;
 						
 			}
 			if(!linkin) {
-				System.out.println(tt);
 				System.out.println("action that failed "+actions[i]);
 				return false;
 				}
