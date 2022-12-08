@@ -151,7 +151,7 @@ public class Node {
         Grid grid = getState().getGrid();
         RescueBoat rescueBoat = getState().getBoat();
         int distance=grid.calculateMinDistanceShip(rescueBoat);
-        if(rescueBoat.isFull() || distance==Integer.MAX_VALUE) return grid.calculateMinDistanceStation(rescueBoat);
+        if(rescueBoat.isFull() || distance==Integer.MAX_VALUE) return -grid.calculateMinDistanceStation(rescueBoat);
         return distance;
     }
 
