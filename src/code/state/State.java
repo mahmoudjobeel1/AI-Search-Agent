@@ -117,7 +117,6 @@ public class State {
     @Override
     public String toString() {
         return "State{" +
-                "grid=" + grid +
                 ", boat=" + boat +
                 ", deaths=" + deaths +
                 ", retrieves=" + retrieves +
