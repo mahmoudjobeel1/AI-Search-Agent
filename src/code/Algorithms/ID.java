@@ -42,17 +42,18 @@ public class ID extends SearchAlgorithm{
                     Node drop = currentNode.drop();
                     Node retrieve = currentNode.retrieve();
 
+                    Node temp=null;
                     if (retrieve != null && previousStates.add(retrieve.toString())) {
                         depthStack.add(depth+1);
-                        stack.add(retrieve);
+                        temp=retrieve;
                     }
                     if (drop != null && previousStates.add(drop.toString())) {
                         depthStack.add(depth+1);
-                        stack.add(drop);
+                        temp=drop;
                     }
                     if (pickup != null && previousStates.add(pickup.toString())) {
                         depthStack.add(depth+1);
-                        stack.add(pickup);
+                        temp=pickup;
                     }
                     if (right != null && previousStates.add(right.toString())) {
                         depthStack.add(depth+1);
@@ -70,6 +71,7 @@ public class ID extends SearchAlgorithm{
                         depthStack.add(depth+1);
                         stack.add(up);
                     }
+                    if(temp!=null) stack.push(temp);
                 }
             }
             previousStates=new HashSet<>();
