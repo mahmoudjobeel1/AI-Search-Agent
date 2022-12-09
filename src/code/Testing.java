@@ -28,6 +28,8 @@ public class Testing {
         list.add(grid8);
         list.add(grid9);
         list.add(grid10);
-        for(String g:list) System.out.println(CoastGuard.solve(g,"GR2",false));
+        for(String g:list)
+        System.out.println(CoastGuard.solve(g,"GR1",false));
+        //System.out.println((Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/(1024.0*1024));
     }
 }

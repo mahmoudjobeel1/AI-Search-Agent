@@ -18,7 +18,7 @@ public class SearchQueue {
     }
     public Comparator<Node> getComparableFunction(){
         switch (strategy){
-            case "GR1": return Comparator.comparingInt(Node::h1);
+            case "GR1": return Comparator.comparingInt(Node::h4);
             case "GR2": return Comparator.comparingInt(Node::h3);
             case "AS1" : return Comparator.comparingInt(Node::aStar1);
             default: return Comparator.comparingInt(Node::aStar2);

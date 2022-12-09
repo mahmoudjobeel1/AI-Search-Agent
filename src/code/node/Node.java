@@ -147,7 +147,7 @@ public class Node {
         ans.append(state.getDeaths()).append(";");
         ans.append(state.getRetrieves()).append(";");
 
-      //  return state.getDeaths()+" "+state.getRetrieves()+" ";
+      // return state.getDeaths()+" "+state.getRetrieves()+" ";
         return ans.toString();
     }
 
@@ -170,6 +170,26 @@ public class Node {
         return -(grid.getM()+grid.getN()) +station ;
     }
 
+    public int h4() {
+        Grid grid = getState().getGrid();
+        RescueBoat rescueBoat = getState().getBoat();
+        int wreckedDistance = grid.calculateMinDistanceWreckedShip(rescueBoat);
+        int nonWreckedDistance = grid.calculateMinDistanceNonWreckedShip(rescueBoat) ;
+        int station = grid.calculateMinDistanceStation(rescueBoat);
+
+        if(leadingAction==ActionType.drop || leadingAction==ActionType.pickup||leadingAction==ActionType.retrieve)
+            return Integer.MIN_VALUE;
+
+        if(rescueBoat.isFull())
+            return  station;
+        if(nonWreckedDistance != Integer.MAX_VALUE) {
+            return  nonWreckedDistance;
+        }
+        if(wreckedDistance != Integer.MAX_VALUE)
+            return wreckedDistance;
+
+        return -(grid.getM()+grid.getN()) +station ;
+    }
 
     public int h2() {
 
