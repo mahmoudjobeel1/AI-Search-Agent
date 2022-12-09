@@ -8,7 +8,7 @@ import code.state.State;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Stack;
+
 
 public class Search {
 
@@ -34,7 +34,6 @@ public class Search {
         return ans.toString();
     }
 
-    // Perform any search strategy except ID
     public Node search() {
         SearchQueue queue=new SearchQueue(strategy);
         Node rootNode = new Node(initialState.clone(), null);
