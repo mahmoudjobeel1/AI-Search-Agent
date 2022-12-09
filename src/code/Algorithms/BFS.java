@@ -1,13 +1,10 @@
 package code.Algorithms;
 
-import code.state.Node;
+import code.node.Node;
 import code.state.State;
 
 
 import java.util.HashSet;
-import java.util.LinkedList;
-
-import java.util.Queue;
 
 public class BFS extends SearchAlgorithm {
 

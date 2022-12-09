@@ -1,9 +1,6 @@
 package code.grid;
 
 
-import code.state.ActionType;
-import code.state.Node;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

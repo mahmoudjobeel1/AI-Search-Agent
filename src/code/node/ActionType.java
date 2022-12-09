@@ -1,4 +1,4 @@
-package code.state;
+package code.node;
 
 public enum ActionType {
     up,

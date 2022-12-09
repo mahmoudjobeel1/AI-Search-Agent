@@ -1,9 +1,10 @@
-package code.state;
+package code.node;
 
 import code.grid.Grid;
 import code.grid.RescueBoat;
 import code.grid.Ship;
 import code.grid.Station;
+import code.state.State;
 
 import java.util.LinkedList;
 

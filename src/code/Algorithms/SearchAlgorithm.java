@@ -1,6 +1,6 @@
 package code.Algorithms;
 
-import code.state.Node;
+import code.node.Node;
 import code.state.State;
 
 
