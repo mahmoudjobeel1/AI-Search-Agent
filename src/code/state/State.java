@@ -22,9 +22,6 @@ public class State {
         this.boat = boat;
     }
 
-    public boolean checkGoalTest(){
-        return grid.isEmpty() && boat.isEmpty();
-    }
 
     public RescueBoat getBoat() {
         return boat;

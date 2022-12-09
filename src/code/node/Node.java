@@ -1,5 +1,6 @@
 package code.node;
 
+import code.CoastGuard;
 import code.grid.Grid;
 import code.grid.RescueBoat;
 import code.grid.Ship;
@@ -204,8 +205,7 @@ public class Node {
         return  -possibleSavedPassengers;
     }
     public int pathCost () {
-        int maxDistance = (state.getGrid().getN()+state.getGrid().getM());
-        return maxDistance*(2*state.getDeaths() + state.getDamagedBoxes()) ;
+        return CoastGuard.pathCost(this);
     }
 
     public int aStar1() {
