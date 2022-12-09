@@ -5,6 +5,7 @@ import code.Algorithms.SearchAlgorithm;
 import code.state.Node;
 import code.grid.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 
@@ -62,17 +63,19 @@ public class CoastGuard {
         String grid9 = "7,5;100;3,4;2,6,3,5;0,0,4,0,1,8,1,4,77,1,5,1,3,2,94,4,3,46;";
         String grid10= "10,6;59;1,7;0,0,2,2,3,0,5,3;1,3,69,3,4,80,4,7,94,4,9,14,5,2,39;";
 
-        //System.out.println(solve(grid0,"AS1",true));
-        System.out.println(solve(grid1,"AS1",true));
-        //System.out.println(solve(grid2,"AS1",true));
-        //System.out.println(solve(grid3,"AS2",true));
-        //System.out.println(solve(grid4,"AS2",true));
-        //System.out.println(solve(grid5,"AS1",true));
-        //System.out.println(solve(grid6,"AS1",true));
-        //System.out.println(solve(grid7,"AS1",true));
-        //System.out.println(solve(grid8,"AS1",true));
-        //System.out.println(solve(grid9,"AS1",true));
-        //System.out.println(solve(grid10,"AS1",true));
+        ArrayList<String> list=new ArrayList<>();
+        list.add(grid0);
+        list.add(grid1);
+        list.add(grid2);
+        list.add(grid3);
+        list.add(grid4);
+        list.add(grid5);
+        list.add(grid6);
+        list.add(grid7);
+        list.add(grid8);
+        list.add(grid9);
+        list.add(grid10);
+        for(String g:list) System.out.println(solve(g,"AS2",false));
 
 
     }

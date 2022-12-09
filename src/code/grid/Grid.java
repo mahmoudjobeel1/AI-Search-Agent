@@ -75,14 +75,7 @@ public class Grid {
         }
         return d;
     }
-    public int calculateMinDistanceShip(RescueBoat rescueBoat) {
-        int dShip = Integer.MAX_VALUE;
-        for(String key: shipsHashMap.keySet()) {
-            int distance=calculateDistance(rescueBoat, key);
-            dShip = Math.min(dShip, distance);
-        }
-        return dShip;
-    }
+
 
     public int calculateMinDistanceWreckedShip(RescueBoat rescueBoat) {
         int dShip = Integer.MAX_VALUE;

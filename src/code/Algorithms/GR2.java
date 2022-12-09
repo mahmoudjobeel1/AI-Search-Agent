@@ -13,14 +13,20 @@ public class GR2 extends SearchAlgorithm {
     public Node search(RescueBoat boat, Grid grid, boolean visualize) {
         State initialState = new State(boat, grid);
         Node rootNode = new Node(initialState, null);
+        PriorityQueue<Node> priorityQueue = new PriorityQueue<>((a,b) -> b.aStarHeuristic2()-a.aStarHeuristic2());
+        priorityQueue.add(rootNode) ;
         previousStates.add(rootNode.toString());
-        Node currentNode=rootNode;
-        while (currentNode!=null) {
+
+        while (!priorityQueue.isEmpty()) {
+
+            Node currentNode= priorityQueue.poll();
             expandedNodes++;
 
             if (currentNode.getState().checkGoalTest()) return currentNode;
 
-            if (visualize) currentNode.getState().gridVisualization();
+            if (visualize){
+                currentNode.getState().gridVisualization();
+            }
 
             Node up = currentNode.up();
             Node down = currentNode.down();
@@ -31,19 +37,22 @@ public class GR2 extends SearchAlgorithm {
             Node retrieve = currentNode.retrieve();
 
 
-            PriorityQueue<Node> priorityQueue = new PriorityQueue<>((a,b) -> b.heuristicGR2()-a.heuristicGR2());
 
-            if (retrieve != null && previousStates.add(retrieve.toString())){ currentNode=retrieve; continue;}
-            if (drop != null && previousStates.add(drop.toString())) {currentNode=drop; continue;}
-            if (pickup != null && previousStates.add(pickup.toString())) {currentNode=pickup; continue;}
-
+            if (retrieve != null && previousStates.add(retrieve.toString())){
+                priorityQueue.add(retrieve);
+            }
+            if (drop != null && previousStates.add(drop.toString())) {
+                priorityQueue.add(drop) ;
+            }
+            if (pickup != null && previousStates.add(pickup.toString())) {
+                priorityQueue.add(pickup) ;
+            }
             if (right != null && previousStates.add(right.toString())) priorityQueue.add(right);
             if (left != null && previousStates.add(left.toString())) priorityQueue.add(left);
             if (down != null && previousStates.add(down.toString())) priorityQueue.add(down);
             if (up != null && previousStates.add(up.toString())) priorityQueue.add(up);
 
-            if(!priorityQueue.isEmpty())
-                currentNode= priorityQueue.poll();
+
 
         }
         return null;
