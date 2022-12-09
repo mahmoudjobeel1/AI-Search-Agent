@@ -1,6 +1,7 @@
 package code.Algorithms;
 
 import code.node.Node;
+import code.queue.SearchQueue;
 import code.state.State;
 
 import java.util.HashSet;

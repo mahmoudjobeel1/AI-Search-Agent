@@ -17,10 +17,8 @@ public class CoastGuard {
     }
     private static SearchAlgorithm getAlgorithm (String strategy){
         switch (strategy) {
-            case "BF" : return new BFS();
-            case "DF" : return new DF() ;
             case "ID" : return new ID() ;
-            default: return new BestFirstSearch() ;
+            default: return new Search() ;
         }
     }
 

@@ -1,4 +1,4 @@
-package code.Algorithms;
+package code.queue;
 
 import code.node.Node;
 
