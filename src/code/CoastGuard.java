@@ -75,7 +75,7 @@ public class CoastGuard {
         list.add(grid8);
         list.add(grid9);
         list.add(grid10);
-        for(String g:list) System.out.println(solve(g,"AS2",false));
+        for(String g:list) System.out.println(solve(g,"GR2",false));
 
 
     }

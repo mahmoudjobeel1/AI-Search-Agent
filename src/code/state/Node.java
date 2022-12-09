@@ -145,12 +145,12 @@ public class Node {
         ans.append(state.getDeaths()).append(";");
         ans.append(state.getRetrieves()).append(";");
 
-       // return state.getDeaths()+" "+state.getRetrieves()+" ";
+        //return state.getDeaths()+" "+state.getRetrieves()+" ";
         return ans.toString();
     }
 
 
-    public int aStarHeuristic1() {
+    public int h1() {
         Grid grid = getState().getGrid();
         RescueBoat rescueBoat = getState().getBoat();
         int wreckedDistance = grid.calculateMinDistanceWreckedShip(rescueBoat);
@@ -169,7 +169,7 @@ public class Node {
     }
 
 
-    public int aStarHeuristic2() {
+    public int h2() {
 
         Grid grid = getState().getGrid();
         RescueBoat rescueBoat = getState().getBoat();
@@ -185,17 +185,34 @@ public class Node {
         }
         return  possibleSavedPassengers;
     }
+    public int h3() {
+
+        Grid grid = getState().getGrid();
+        RescueBoat rescueBoat = getState().getBoat();
+        int possibleSavedPassengers = grid.getHighestNumOfPossibleSavedPassengers(rescueBoat);
+        int wreckedDistance = grid.calculateMinDistanceWreckedShip(rescueBoat);
+        int station = grid.calculateMinDistanceStation(rescueBoat);
+        if(leadingAction==ActionType.drop || leadingAction==ActionType.pickup||leadingAction==ActionType.retrieve)
+            return Integer.MIN_VALUE;
+        if(rescueBoat.isFull())
+            return  station;
+        if(possibleSavedPassengers == Integer.MIN_VALUE) {
+            if (wreckedDistance != Integer.MAX_VALUE)
+                return wreckedDistance* grid.getM()* grid.getN();
+        }
+        return  -possibleSavedPassengers;
+    }
     public int pathCost () {
         int maxDistance = (state.getGrid().getN()+state.getGrid().getM());
         return maxDistance*(2*state.getDeaths() + state.getDamagedBoxes()) ;
     }
 
     public int aStar1() {
-        return pathCost() + aStarHeuristic1() ;
+        return pathCost() + h1() ;
     }
 
     public int aStar2() {
-        return pathCost() + aStarHeuristic2();
+        return pathCost() + h2();
     }
 
     public State getState() {

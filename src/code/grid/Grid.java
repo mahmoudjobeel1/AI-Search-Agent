@@ -64,7 +64,7 @@ public class Grid {
 
 
     private int calculateDistance(RescueBoat b, String s){
-        String[] loc = ((String)s).split(" ");
+        String[] loc = s.split(" ");
         return Math.abs(Integer.parseInt(loc[0]) - b.getX()) + Math.abs(Integer.parseInt(loc[1]) - b.getY());
     }
 

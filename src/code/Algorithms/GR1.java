@@ -13,7 +13,7 @@ public class GR1 extends SearchAlgorithm{
     public Node search(RescueBoat boat, Grid grid, boolean visualize) {
         State initialState = new State(boat, grid);
         Node rootNode = new Node(initialState, null);
-        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Node::aStarHeuristic1));
+        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Node::h1));
         priorityQueue.add(rootNode) ;
         previousStates.add(rootNode.toString());
 
