@@ -37,15 +37,9 @@ public class BestFirstSearch extends SearchAlgorithm{
 
 
 
-            if (retrieve != null && previousStates.add(retrieve.toString())){
-                priorityQueue.add(retrieve);
-            }
-            if (drop != null && previousStates.add(drop.toString())) {
-                priorityQueue.add(drop) ;
-            }
-            if (pickup != null && previousStates.add(pickup.toString())) {
-                priorityQueue.add(pickup) ;
-            }
+            if (retrieve != null && previousStates.add(retrieve.toString())) priorityQueue.add(retrieve);
+            if (drop != null && previousStates.add(drop.toString())) priorityQueue.add(drop) ;
+            if (pickup != null && previousStates.add(pickup.toString())) priorityQueue.add(pickup) ;
             if (right != null && previousStates.add(right.toString())) priorityQueue.add(right);
             if (left != null && previousStates.add(left.toString())) priorityQueue.add(left);
             if (down != null && previousStates.add(down.toString())) priorityQueue.add(down);

@@ -66,7 +66,11 @@ public class CoastGuard {
         list.add(grid8);
         list.add(grid9);
         list.add(grid10);
-        for(String g:list) System.out.println(solve(GenGrid(),"GR2",false));
+       // for(String g:list) System.out.println(solve(GenGrid(),"GR2",false));
+        String grid="9,14;99;6,12;7,6,8,8,0,13,3,1,4,9,4,7;7,13,93,7,3,34,1,12,58,2,5,59,0,7,38,3,9,90;";
+        System.out.println(grid);
+        System.out.println(solve(grid,"AS2",false));
+
 
     }
 }
