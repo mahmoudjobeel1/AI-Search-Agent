@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class CoastGuard {
 
 
-    public static String GenGrid() {
-        return GridGenerator.GenGrid();
+    public static String genGrid() {
+        return GridGenerator.genGrid();
     }
     private static SearchAlgorithm getAlgorithm (String strategy){
         switch (strategy) {
