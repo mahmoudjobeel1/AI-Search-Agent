@@ -1,9 +1,7 @@
 package code.Algorithms;
 
-import code.grid.Grid;
 import code.state.Node;
 import code.state.State;
-import code.grid.RescueBoat;
 
 
 import java.util.HashSet;
@@ -14,14 +12,14 @@ import java.util.Queue;
 public class BFS extends SearchAlgorithm {
 
     @Override
-    public Node search(RescueBoat boat, Grid grid, boolean visualize) {
+    public Node search(State initialState, String strategy, boolean visualize) {
 
+        SearchQueue queue=new SearchQueue(strategy);
+        previousStates=new HashSet<>();
 
-        Queue<Node> queue = new LinkedList<>() ;
-        State initialState = new State(boat,grid);
         Node rootNode = new Node(initialState, null) ;
-        previousStates.add(rootNode.toString());
 
+        previousStates.add(rootNode.toString());
         queue.add(rootNode) ;
 
         while (!queue.isEmpty()) {

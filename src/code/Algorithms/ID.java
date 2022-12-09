@@ -1,8 +1,6 @@
 package code.Algorithms;
 
-import code.grid.Grid;
 import code.state.Node;
-import code.grid.RescueBoat;
 import code.state.State;
 
 import java.util.HashSet;
@@ -11,20 +9,21 @@ import java.util.Stack;
 public class ID extends SearchAlgorithm{
 
     @Override
-    public Node search(RescueBoat boat, Grid grid, boolean visualize) {
+    public Node search(State initialState, String strategy, boolean visualize) {
         int maxDepth =0;
         while(true) {
-            Stack<Node> stack = new Stack<>();
+            SearchQueue queue=new SearchQueue(strategy);
             Stack<Integer> depthStack=new Stack<>();
-            State initialState = new State(boat, grid);
-            Node rootNode = new Node(initialState, null);
-            previousStates.add(rootNode.toString());
+            previousStates=new HashSet<>();
 
-            stack.add(rootNode);
+            Node rootNode = new Node(initialState, null);
+
+            previousStates.add(rootNode.toString());
+            queue.add(rootNode);
             depthStack.add(0);
 
-            while (!stack.isEmpty()) {
-                Node currentNode = stack.pop();
+            while (!queue.isEmpty()) {
+                Node currentNode = queue.poll();
                 int depth=depthStack.pop();
 
                 expandedNodes++;
@@ -45,35 +44,34 @@ public class ID extends SearchAlgorithm{
 
                     if (right != null && previousStates.add(right.toString())) {
                         depthStack.add(depth+1);
-                        stack.add(right);
+                        queue.add(right);
                     }
                     if (left != null && previousStates.add(left.toString())){
                         depthStack.add(depth+1);
-                        stack.add(left);
+                        queue.add(left);
                     }
                     if (down != null && previousStates.add(down.toString())) {
                         depthStack.add(depth+1);
-                        stack.add(down);
+                        queue.add(down);
                     }
                     if (up != null && previousStates.add(up.toString())){
                         depthStack.add(depth+1);
-                        stack.add(up);
+                        queue.add(up);
                     }
                     if (retrieve != null && previousStates.add(retrieve.toString())) {
                         depthStack.add(depth+1);
-                        stack.push(retrieve);
+                        queue.add(retrieve);
                     }
                     if (drop != null && previousStates.add(drop.toString())) {
                         depthStack.add(depth+1);
-                        stack.push(drop);
+                        queue.add(drop);
                     }
                     if (pickup != null && previousStates.add(pickup.toString())) {
                         depthStack.add(depth+1);
-                        stack.push(pickup);
+                        queue.add(pickup);
                     }
                 }
             }
-            previousStates=new HashSet<>();
             maxDepth++;
         }
     }

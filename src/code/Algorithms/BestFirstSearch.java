@@ -1,24 +1,24 @@
 package code.Algorithms;
 
-import code.grid.Grid;
-import code.grid.RescueBoat;
 import code.state.Node;
 import code.state.State;
 
-import java.util.PriorityQueue;
+import java.util.HashSet;
 
 public class BestFirstSearch extends SearchAlgorithm{
     @Override
-    public Node search(RescueBoat boat, Grid grid, boolean visualize) {
-        State initialState = new State(boat, grid);
+    public Node search(State initialState, String strategy, boolean visualize) {
+        SearchQueue queue=new SearchQueue(strategy);
+        previousStates=new HashSet<>();
+
         Node rootNode = new Node(initialState, null);
-        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(getComparableFunction());
-        priorityQueue.add(rootNode) ;
+
+        queue.add(rootNode) ;
         previousStates.add(rootNode.toString());
 
-        while (!priorityQueue.isEmpty()) {
+        while (!queue.isEmpty()) {
 
-            Node currentNode= priorityQueue.poll();
+            Node currentNode= queue.poll();
             expandedNodes++;
 
             if (currentNode.getState().checkGoalTest()) return currentNode;
@@ -37,13 +37,13 @@ public class BestFirstSearch extends SearchAlgorithm{
 
 
 
-            if (retrieve != null && previousStates.add(retrieve.toString())) priorityQueue.add(retrieve);
-            if (drop != null && previousStates.add(drop.toString())) priorityQueue.add(drop) ;
-            if (pickup != null && previousStates.add(pickup.toString())) priorityQueue.add(pickup) ;
-            if (right != null && previousStates.add(right.toString())) priorityQueue.add(right);
-            if (left != null && previousStates.add(left.toString())) priorityQueue.add(left);
-            if (down != null && previousStates.add(down.toString())) priorityQueue.add(down);
-            if (up != null && previousStates.add(up.toString())) priorityQueue.add(up);
+            if (retrieve != null && previousStates.add(retrieve.toString())) queue.add(retrieve);
+            if (drop != null && previousStates.add(drop.toString())) queue.add(drop) ;
+            if (pickup != null && previousStates.add(pickup.toString())) queue.add(pickup) ;
+            if (right != null && previousStates.add(right.toString())) queue.add(right);
+            if (left != null && previousStates.add(left.toString())) queue.add(left);
+            if (down != null && previousStates.add(down.toString())) queue.add(down);
+            if (up != null && previousStates.add(up.toString())) queue.add(up);
 
         }
         return null;

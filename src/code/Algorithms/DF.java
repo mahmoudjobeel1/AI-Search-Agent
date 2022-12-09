@@ -1,8 +1,6 @@
 package code.Algorithms;
 
-import code.grid.Grid;
 import code.state.Node;
-import code.grid.RescueBoat;
 import code.state.State;
 
 import java.util.*;
@@ -10,17 +8,18 @@ import java.util.*;
 public class DF extends SearchAlgorithm{
 
     @Override
-    public Node search(RescueBoat boat, Grid grid, boolean visualize) {
+    public Node search(State initialState, String strategy, boolean visualize) {
 
-        Stack<Node> stack = new Stack<>() ;
-        State initialState = new State(boat,grid);
+        SearchQueue queue=new SearchQueue(strategy);
+        previousStates=new HashSet<>();
+
         Node rootNode = new Node(initialState, null) ;
+
         previousStates.add(rootNode.toString());
+        queue.add(rootNode); ;
 
-        stack.add(rootNode) ;
-
-        while (!stack.isEmpty()) {
-            Node currentNode = stack.pop();
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
 
             expandedNodes++;
 
@@ -38,14 +37,14 @@ public class DF extends SearchAlgorithm{
 
 
 
-            if(right!=null && previousStates.add(right.toString())) stack.add(right);
-            if(left!=null && previousStates.add(left.toString())) stack.add(left);
-            if(down!=null && previousStates.add(down.toString())) stack.add(down);
-            if(up!=null && previousStates.add(up.toString())) stack.add(up);
+            if(right!=null && previousStates.add(right.toString())) queue.add(right);
+            if(left!=null && previousStates.add(left.toString()))  queue.add(left);
+            if(down!=null && previousStates.add(down.toString()))  queue.add(down);
+            if(up!=null && previousStates.add(up.toString()))  queue.add(up);
 
-            if(retrieve!=null && previousStates.add(retrieve.toString())) stack.push(retrieve);
-            if(drop!=null && previousStates.add(drop.toString())) stack.push(drop);
-            if(pickup!=null && previousStates.add(pickup.toString())) stack.push(pickup);
+            if(retrieve!=null && previousStates.add(retrieve.toString()))  queue.add(retrieve);
+            if(drop!=null && previousStates.add(drop.toString()))  queue.add(drop);
+            if(pickup!=null && previousStates.add(pickup.toString()))  queue.add(pickup);
         }
         return null;
     }

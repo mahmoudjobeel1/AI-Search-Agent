@@ -1,8 +1,7 @@
 package code.Algorithms;
 
-import code.grid.Grid;
 import code.state.Node;
-import code.grid.RescueBoat;
+import code.state.State;
 
 
 import java.util.Comparator;
@@ -16,7 +15,9 @@ public abstract class SearchAlgorithm {
     public int expandedNodes;
 
     public String strategy;
-    public abstract Node search (RescueBoat boat, Grid grid, boolean visualize)  ;
+
+   public State initialState;
+    public abstract Node search (State initialState,String strategy , boolean visualize)  ;
 
     public Comparator<Node> getComparableFunction(){
         switch (strategy){
