@@ -12,9 +12,8 @@ import java.util.HashSet;
 public class CoastGuard {
 
 
-    public static String genGrid() {
-        GridGenerator gridGenerator = new GridGenerator() ;
-        return gridGenerator.generateNewGrid();
+    public static String GenGrid() {
+        return GridGenerator.GenGrid();
     }
     private static SearchAlgorithm getAlgorithm (String strategy){
         switch (strategy) {
@@ -43,12 +42,6 @@ public class CoastGuard {
     }
 
     public static void main(String[] args) {
-        String grid = "5,6;50;0,1;0,4,3,3;1,1,90;";
-       // String grid="7,5;40;2,3;3,6;1,1,10,4,5,90;";
-        // String grid=GridGenerator.genGrid();
-        // String grid="9,13;65;6,4;3,8,6,2,2,2;1,12,88,7,4,45,2,9,41,5,8,12,7,12,96;";
-
-
         String grid0 = "5,6;50;0,1;0,4,3,3;1,1,20;";
         String grid1 = "6,6;52;2,0;2,4,4,0,5,4;2,1,19,4,2,6,5,0,8;";
         String grid2 = "7,5;40;2,3;3,6;1,1,10,4,5,90;";
@@ -73,8 +66,7 @@ public class CoastGuard {
         list.add(grid8);
         list.add(grid9);
         list.add(grid10);
-        for(String g:list) System.out.println(solve(g,"GR2",false));
-
+        for(String g:list) System.out.println(solve(GenGrid(),"GR2",false));
 
     }
 }

@@ -5,7 +5,6 @@ import code.grid.RescueBoat;
 import code.state.Node;
 import code.state.State;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class BestFirstSearch extends SearchAlgorithm{
@@ -51,8 +50,6 @@ public class BestFirstSearch extends SearchAlgorithm{
             if (left != null && previousStates.add(left.toString())) priorityQueue.add(left);
             if (down != null && previousStates.add(down.toString())) priorityQueue.add(down);
             if (up != null && previousStates.add(up.toString())) priorityQueue.add(up);
-
-
 
         }
         return null;

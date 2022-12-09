@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class GridGenerator {
 
-    public static String generateNewGrid (){
+    public static String GenGrid(){
         StringBuilder grid=new StringBuilder();
 
           /* this hashset in responsible for check if a position is occupied or not
