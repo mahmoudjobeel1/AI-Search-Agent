@@ -1,20 +1,19 @@
 package code.Algorithms;
 
 import code.grid.Grid;
-import code.state.Node;
 import code.grid.RescueBoat;
+import code.state.Node;
 import code.state.State;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class AS2 extends SearchAlgorithm {
+public class BestFirstSearch extends SearchAlgorithm{
     @Override
     public Node search(RescueBoat boat, Grid grid, boolean visualize) {
-
         State initialState = new State(boat, grid);
         Node rootNode = new Node(initialState, null);
-        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(Node::aStar2));
+        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(getComparableFunction());
         priorityQueue.add(rootNode) ;
         previousStates.add(rootNode.toString());
 
@@ -25,7 +24,9 @@ public class AS2 extends SearchAlgorithm {
 
             if (currentNode.getState().checkGoalTest()) return currentNode;
 
-            if (visualize) currentNode.getState().gridVisualization();
+            if (visualize){
+                currentNode.getState().gridVisualization();
+            }
 
             Node up = currentNode.up();
             Node down = currentNode.down();
@@ -50,6 +51,7 @@ public class AS2 extends SearchAlgorithm {
             if (left != null && previousStates.add(left.toString())) priorityQueue.add(left);
             if (down != null && previousStates.add(down.toString())) priorityQueue.add(down);
             if (up != null && previousStates.add(up.toString())) priorityQueue.add(up);
+
 
 
         }

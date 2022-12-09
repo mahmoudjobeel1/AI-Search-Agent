@@ -21,10 +21,7 @@ public class CoastGuard {
             case "BF" : return new BFS();
             case "DF" : return new DF() ;
             case "ID" : return new ID() ;
-            case "GR1" : return new GR1() ;
-            case "GR2" : return new GR2() ;
-            case "AS1" : return new AS1() ;
-            default: return new AS2() ;
+            default: return new BestFirstSearch() ;
         }
     }
 
@@ -36,6 +33,7 @@ public class CoastGuard {
         RescueBoat boat=(RescueBoat) objects[0];
         Grid gridObject=(Grid) objects[1];
         SearchAlgorithm algorithm = CoastGuard.getAlgorithm(strategy);
+        algorithm.strategy=strategy;
         algorithm.previousStates=new HashSet<>();
         Node goalState = algorithm.search(boat,gridObject,visualize);
 
