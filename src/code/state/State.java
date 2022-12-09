@@ -80,6 +80,8 @@ public class State {
         clone.boat=boat.clone();
         clone.deaths=deaths;
         clone.retrieves=retrieves;
+        clone.damagedBoxes=damagedBoxes;
+        clone.currentDamages=currentDamages;
         return clone;
     }
 

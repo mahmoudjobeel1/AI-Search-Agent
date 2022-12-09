@@ -29,7 +29,7 @@ public class Search {
     }
 
     public String getSolution(){
-        Node target=strategy.equals("ID")? ID():search();
+        Node target=search();
         StringBuilder ans=new StringBuilder(target.getGoalTestNodeString()).append(expandedNodes);
         return ans.toString();
     }
@@ -37,9 +37,10 @@ public class Search {
     // Perform any search strategy except ID
     public Node search() {
         SearchQueue queue=new SearchQueue(strategy);
-        Node rootNode = new Node(initialState, null);
+        Node rootNode = new Node(initialState.clone(), null);
         queue.add(rootNode) ;
         previousStates.add(rootNode.toString());
+        int maxDepth=0;
         while (!queue.isEmpty()) {
 
             Node currentNode= queue.poll();
@@ -49,44 +50,24 @@ public class Search {
 
             if (visualize) currentNode.getState().gridVisualization();
 
-            for(Object action :actionList){
-                Node node= PerformAction.perform(currentNode,(String) action);
-                if (node != null && previousStates.add(node.toString())) queue.add(node);
+
+            if(!(strategy.equals("ID") && currentNode.getDepth()>= maxDepth)){
+                for(Object action :actionList){
+                    Node node= PerformAction.perform(currentNode,(String) action);
+                    if (node != null && previousStates.add(node.toString())) {queue.add(node);  node.setDepth(currentNode.getDepth()+1);}
+                }
             }
 
+            if(strategy.equals("ID") && queue.isEmpty()){
+                queue=new SearchQueue(strategy);
+                rootNode= new Node(initialState.clone(), null);
+                queue.add(rootNode) ;
+                previousStates=new HashSet<>();
+                previousStates.add(rootNode.toString());
+                maxDepth++;
+            }
         }
         return null;
     }
 
-    public Node ID() {
-        int maxDepth =0;
-        while(true) {
-            SearchQueue queue=new SearchQueue(strategy);
-            Stack<Integer> depthStack=new Stack<>();
-            previousStates=new HashSet<>();
-            Node rootNode = new Node(initialState, null);
-            previousStates.add(rootNode.toString());
-            queue.add(rootNode);
-            depthStack.add(0);
-
-            while (!queue.isEmpty()) {
-                Node currentNode = queue.poll();
-                int depth=depthStack.pop();
-
-                expandedNodes++;
-
-                if (CoastGuard.checkGoalTest(currentNode)) return currentNode;
-
-                if (visualize) currentNode.getState().gridVisualization();
-
-                if(depth< maxDepth) {
-                    for(Object action :actionList){
-                        Node node= PerformAction.perform(currentNode,(String) action);
-                        if (node != null && previousStates.add(node.toString())) {queue.add(node); depthStack.add(depth+1);}
-                    }
-                }
-            }
-            maxDepth++;
-        }
-    }
 }

@@ -38,6 +38,7 @@ public class RescueBoat {
         clone.setCapacity(this.capacity);
         clone.setRescuedPassengers(this.rescuedPassengers);
         clone.setAvailableCapacity(this.availableCapacity) ;
+        clone.setRescuedBlackBoxes(this.rescuedBlackBoxes);
         return clone ;
     }
 

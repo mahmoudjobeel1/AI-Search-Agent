@@ -40,4 +40,5 @@ public class SearchQueue {
     public boolean isEmpty(){
         return queue.isEmpty();
     }
+    public String toString(){return queue.toString();}
 }

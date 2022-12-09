@@ -13,7 +13,7 @@ public class Node {
     private State state ;
     private Node parent;
     private ActionType leadingAction;
-
+    private int depth;
 
     public Node() {}
 
@@ -147,8 +147,8 @@ public class Node {
         ans.append(state.getDeaths()).append(";");
         ans.append(state.getRetrieves()).append(";");
 
-        //return state.getDeaths()+" "+state.getRetrieves()+" ";
-        return ans.toString();
+        return state.getDeaths()+" "+state.getRetrieves()+" ";
+      //  return ans.toString();
     }
 
 
@@ -239,6 +239,14 @@ public class Node {
 
     public void setLeadingAction(ActionType leadingAction) {
         this.leadingAction = leadingAction;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 
     public String toString () {
