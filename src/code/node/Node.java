@@ -147,8 +147,8 @@ public class Node {
         ans.append(state.getDeaths()).append(";");
         ans.append(state.getRetrieves()).append(";");
 
-        return state.getDeaths()+" "+state.getRetrieves()+" ";
-      //  return ans.toString();
+      //  return state.getDeaths()+" "+state.getRetrieves()+" ";
+        return ans.toString();
     }
 
 
