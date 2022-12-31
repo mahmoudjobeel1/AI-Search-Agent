@@ -34,3 +34,32 @@ retrieve as many black boxes as possible
   
 • ***Stations***: 
     Stations are fixed and do not have any capacity limits. To count a passenger saved, they need to be dropped at a station.
+
+## Actions:
+• ***Pick-up***: 
+        The coast guard picks up as many passengers off a ship as its remaining
+        capacity allows. This can be done on a ship that is in the same cell as the coast
+        guard and it only affects this ship. Once a passenger is picked up by the coast
+        guard, they will not expire and will stay on the coast guard boat until they are
+        dropped at a station.
+        
+• ***Drop***: 
+        The coast guard drops all passengers it is currently carrying at a station.
+        This can only be done when the coast guard and the station are in the same cell
+        and it resets the remaining capacity of the coast guard boat to 0.
+        
+• ***Retrieve***:
+        The coast guard boat retrieves a black box. This can only be done when
+        the coast guard boat is in the same cell as a wreck with a black box which has
+        not been completely damaged yet. This action does not affect the coast guard’s
+        remaining capacity at all.
+        
+• ***Movement in any of the 4 directions***
+        (up, down, left, right) within the grid boundaries.
+  
+## Algorithms Implemented
+a) Breadth-first search.
+b) Depth-first search.
+c) Iterative deepening search.
+d) Greedy search with at least two heuristics.
+e) A∗ search with at least two admissible heuristics. A trivial heuristic
