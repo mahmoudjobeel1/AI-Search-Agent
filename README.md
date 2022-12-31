@@ -13,17 +13,24 @@ carrying any passengers. You would also like to rescue as many people as possibl
 retrieve as many black boxes as possible
 
 ## Project Objects:
-• ***Coast Guard Boat***: The coast guard boat is the agent; it is the only element that
-can move on the grid. The coast guard can enter any cell. It has a fixed capacity
-30 ≤ c ≤ 100 which indicates the number of passengers it can carry at one time.
-So it may have to make multiple visits to one ship to save all the passengers on it.
-• Ships: Each ship has a certain number of passengers and, at every time step, one
-of them expires. The ship is considered sunk when all of them are expired or all are
-picked up In that case, it becomes a wreck. Each ship contains a black box that
-can be retrieved after it sinks as long as it has not been completely damaged.
-• Wrecks: Once the ship no longer has any passengers (all expire or all are picked
-up), it becomes a wreck. When the ship becomes a wreck (once its last passenger
-either expires or is picked up), in the next time step, the black box starts counting
-damage from 1 all the way up to 20. Once damage reaches 20, the black box is no
-longer retrievable.
-• Stations: Stations are fixed and do not have any capacity limits. To count a passenger saved, they need to be dropped at a station.
+• ***Coast Guard Boat***: 
+    The coast guard boat is the agent; it is the only element that
+    can move on the grid. The coast guard can enter any cell. It has a fixed capacity
+    30 ≤ c ≤ 100 which indicates the number of passengers it can carry at one time.
+    So it may have to make multiple visits to one ship to save all the passengers on it.
+
+• ***Ships***: 
+    Each ship has a certain number of passengers and, at every time step, one
+    of them expires. The ship is considered sunk when all of them are expired or all are
+    picked up In that case, it becomes a wreck. Each ship contains a black box that
+    can be retrieved after it sinks as long as it has not been completely damaged.
+    
+• ***Wrecks***: 
+    Once the ship no longer has any passengers (all expire or all are picked
+    up), it becomes a wreck. When the ship becomes a wreck (once its last passenger
+    either expires or is picked up), in the next time step, the black box starts counting
+    damage from 1 all the way up to 20. Once damage reaches 20, the black box is no
+    longer retrievable.
+  
+• ***Stations***: 
+    Stations are fixed and do not have any capacity limits. To count a passenger saved, they need to be dropped at a station.
