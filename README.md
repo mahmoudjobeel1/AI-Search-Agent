@@ -59,6 +59,7 @@ retrieve as many black boxes as possible
   
 ## Algorithms Implemented
 a) Breadth-first search.
+</>
 b) Depth-first search.
 c) Iterative deepening search.
 d) Greedy search with at least two heuristics.
