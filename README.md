@@ -13,8 +13,7 @@ carrying any passengers. You would also like to rescue as many people as possibl
 retrieve as many black boxes as possible
 
 ## Project Objects:
-• ###Coast Guard Boat: 
-The coast guard boat is the agent; it is the only element that
+• ***Coast Guard Boat***: The coast guard boat is the agent; it is the only element that
 can move on the grid. The coast guard can enter any cell. It has a fixed capacity
 30 ≤ c ≤ 100 which indicates the number of passengers it can carry at one time.
 So it may have to make multiple visits to one ship to save all the passengers on it.
