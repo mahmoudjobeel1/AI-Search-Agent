@@ -58,9 +58,8 @@ retrieve as many black boxes as possible
         (up, down, left, right) within the grid boundaries.
   
 ## Algorithms Implemented
-a) Breadth-first search.
-</>
-b) Depth-first search.
-c) Iterative deepening search.
-d) Greedy search with at least two heuristics.
-e) A∗ search with at least two admissible heuristics. A trivial heuristic
+a) Breadth-first search. <br />
+b) Depth-first search. <br />
+c) Iterative deepening search. <br />
+d) Greedy search with at least two heuristics. <br />
+e) A∗ search with at least two admissible heuristics. A trivial heuristic <br />
