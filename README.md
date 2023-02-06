@@ -63,3 +63,6 @@ b) Depth-first search. <br />
 c) Iterative deepening search. <br />
 d) Greedy search with at least two heuristics. <br />
 e) A∗ search with at least two admissible heuristics. <br />
+
+
+For more Information, please read [Project Report](Project Report.pdf)
