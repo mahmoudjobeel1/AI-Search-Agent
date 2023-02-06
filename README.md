@@ -65,4 +65,4 @@ d) Greedy search with at least two heuristics. <br />
 e) A∗ search with at least two admissible heuristics. <br />
 
 
-For more Information, please read [Project Report](Project Report.pdf)
+For more Information, please read [Project Report.pdf](Project Report)
