@@ -65,4 +65,4 @@ d) Greedy search with at least two heuristics. <br />
 e) A∗ search with at least two admissible heuristics. <br />
 
 
-For more Information, please read [https://github.com/mahmoudjobeel1/AI-Search-Agent/blob/725ae824db74a000fc6366e49376918f0f06ffb9/Project%20Report.pdf](Project Report)
+For more Information, please read [Project Report](https://github.com/mahmoudjobeel1/AI-Search-Agent/blob/725ae824db74a000fc6366e49376918f0f06ffb9/Project%20Report.pdf)
